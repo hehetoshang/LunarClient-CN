@@ -1,0 +1,71 @@
+# LunarClient InputFix
+
+> Write in Chinese
+
+## 远程攻击漏洞
+
+原版的LunarClient有远程攻击漏洞(jquery使用的是3.3.1版本,LC是把服务器搭建在本地,所以并不存在被攻击的风险,但是LC也可以被部署在服务器端)
+
+## 下载
+
+> 可以的话去B站给个三连或点击右上角Star给星标, [B站传送门](https://www.bilibili.com/read/cv17100937)
+
+[点击此处](https://github.com/chenmy1903/LunarClient/releases)
+
+## 这是什么
+
+> 中文修复感谢[sduoduo233](https://github.com/sduoduo233/LunarInputFix)的代码
+
+因为低版本的Minecraft无法输入中文, 这是一个Lunar Client的插件, 可以解决中文修复问题
+
+## 快捷方式教程
+
+创建快捷方式不要把主程序`Lunar Client.exe`做成快捷方式, 这样做会使程序出现bug
+
+----------------↓正确方法↓---------------------
+
+1. 将`launchlc.bat`弄成快捷方式
+2. 右键->属性->自定义->更改图标->选择LC的主程序-> 选择第一个图标->点击确定
+
+## Get help
+
+1. Join my guild in hypixel -> `/g join AllForLove`
+2. join discord server
+3. get help in the discord server
+
+## FAQ
+
+### 会ban吗
+
+不会
+
+### 有后门吗
+
+没有, 开放源代码, 可以去看
+
+## 更新日志
+
+> 判断版本不会做, 如果你会做直接加我QQ就行: `2834886052`
+
+### 2.10.1-fix2
+
+1. 修改不是人话的汉化
+2. 汉化部分错误报告
+
+### 2.10.1-fix1
+
+1. 修复因为依赖库错误而导致中文输入无法启动的bug
+
+### 2.10.1
+
+> 此版本起开始开源
+
+1. 中文修复使用Python写(主要是c#搞不明白)
+2. 汉化启动器(没汉化的地方就是改不了的地方)
+
+### 2.10.1-old1
+
+> bug贼多的版本, 本版本并没有开源
+
+1. 有个毛用的中文修复
+2. 汉化About界面
