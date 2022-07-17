@@ -83,14 +83,15 @@ Interceptor.attach(Module.getExportByName('user32.dll', 'PeekMessageW'), {
             var keycode = msg.wParam
             var pervious_state = (msg.lParam >>> 30) & 0x1
             var state = 1 - ((msg.lParam >>> 31) & 0x1)
-            console.log("keydown", JSON.stringify(msg), String.fromCharCode(keycode))
+            %s
         }
     }
 })
-""")
+""" % ('console.log("keydown", JSON.stringify(msg), String.fromCharCode(keycode))' if WRITE_LOG else ""))
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-log = os.path.join(BASE_DIR, "inputfixlog.log")
-logf = open(log, "a")
+if WRITE_LOG:
+    log = os.path.join(BASE_DIR, "inputfixlog.log")
+    logf = open(log, "a")
 def on_message(message, data):
     """写入日志"""
     if WRITE_LOG:
@@ -102,4 +103,4 @@ print("不要关闭本窗口,关闭后中文修复会失效")
 # print("关闭游戏后中文修复会自动关闭 (有bug)")
 print("log文件: {}".format(log)) if WRITE_LOG else print("log已被禁用,修改WRITE_LOG变量以开启(调试才用开)")
 while True:
-    time.sleep(114514) # 游戏太卡修改此值(增大)
+    time.sleep(114514)

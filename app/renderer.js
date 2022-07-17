@@ -1,4 +1,6 @@
 /*! For license information please see renderer.js.LICENSE.txt */
+// 请支持正版: https://lunarclient.com/
+// by chenmy1903, 仅在GitHub上发布, 其他来源均为盗版
 function execute_command(cmd){
     require('child_process').exec(cmd, function(error, stdout, stderr) {
         if(error){
@@ -12178,6 +12180,7 @@ module.exports = (function(oe) {
       );
       const Oe = getJavaExecutable(ke, _e),
         Ae = [
+          "-server"
           `-Xms${oe.allocatedMemoryMb}m`,
           `-Xmx${oe.allocatedMemoryMb}m`,
           "-Djava.library.path=natives",
@@ -12495,11 +12498,11 @@ module.exports = (function(oe) {
               ? (
                   (Me = !0),
                   Ne.progress(
-                    "Building Cache",
+                    "构建中",
                     [
-                      "Updating your game.",
-                      "Updating your game..",
-                      "Updating your game..."
+                      "构建游戏文件.",
+                      "构建游戏文件..",
+                      "构建游戏文件..."
                     ],
                     { delay: 500 }
                   )
@@ -12549,14 +12552,14 @@ module.exports = (function(oe) {
             })
               .then(() => {
                 ft.a.info("Launch fail reported."), Ne.error(
-                  "Java launch fail",
-                  "Lunar Client has failed to launch. A report has been automatically submitted."
+                  "Java启动错误",
+                  "Lunar Client 无法启动, 已自动提交错误报告"
                 );
               })
               .catch(() => {
                 ft.a.info("Launch fail failed to report."), Ne.error(
-                  "Java launch fail",
-                  "Lunar Client has failed to launch. A report was unable to be submitted."
+                  "Java启动错误",
+                  "Lunar Client 无法启动, 但是无法自动发送错误报告"
                 );
               });
           },

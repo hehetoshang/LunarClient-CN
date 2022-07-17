@@ -2,10 +2,6 @@
 
 > Write in Chinese
 
-## 远程攻击漏洞
-
-原版的LunarClient有远程攻击漏洞(jquery使用的是3.3.1版本,LC是把服务器搭建在本地,所以并不存在被攻击的风险,但是LC也可以被部署在服务器端)
-
 ## 下载
 
 > 可以的话去B站给个三连或点击右上角Star给星标, [B站传送门](https://www.bilibili.com/read/cv17100937)
@@ -27,11 +23,12 @@
 1. 将`launchlc.bat`弄成快捷方式
 2. 右键->属性->自定义->更改图标->选择LC的主程序-> 选择第一个图标->点击确定
 
-## Get help
+## 部分错误以及解决办法
 
-1. Join my guild in hypixel -> `/g join AllForLove`
-2. join discord server
-3. get help in the discord server
+> 先下载新版本试试
+
+1. [Java启动错误](help/java-launch-failed.md)
+2. [启动器卡住](help/launcher-failed.md)
 
 ## FAQ
 
@@ -45,7 +42,15 @@
 
 ## 更新日志
 
-> 判断版本不会做, 如果你会做直接加我QQ就行: `2834886052`
+### 2.11.2-fix1
+
+1. 优化启动选项
+2. 汉化构建游戏部分
+3. 优化inputfix-log, 未开启log的时候不创建log文件
+
+### 2.11.2
+
+1. 升级到2.11.2版本
 
 ### 2.10.1-fix2
 
