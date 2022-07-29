@@ -39,7 +39,7 @@ Interceptor.attach(Module.getExportByName('user32.dll', 'PeekMessageW'), {
                 msgPointer.add(Process.pointerSize).writeUInt(msg.message)
                 msgPointer.add(Process.pointerSize+8).writeU64(msg.wParam)
                 msgPointer.add(Process.pointerSize+8+8).writeU64(msg.lParam)
-                console.log("--> SEND", JSON.stringify(readMessage(msgPointer)))
+                %s
                 retval.replace(0x1)
             }
             return
@@ -50,7 +50,7 @@ Interceptor.attach(Module.getExportByName('user32.dll', 'PeekMessageW'), {
         // CHAR
         if(msg.message == 258){
             var char = msg.wParam & 65535
-            console.log("char", JSON.stringify(msg), String.fromCharCode(char))
+            %s
             if(char > 255){
                 retval.replace(0x0)
                 
@@ -87,7 +87,7 @@ Interceptor.attach(Module.getExportByName('user32.dll', 'PeekMessageW'), {
         }
     }
 })
-""" % ('console.log("keydown", JSON.stringify(msg), String.fromCharCode(keycode))' if WRITE_LOG else ""))
+""" % ('console.log("--> SEND", JSON.stringify(readMessage(msgPointer)))' if WRITE_LOG else "", 'console.log("char", JSON.stringify(msg), String.fromCharCode(char))' if WRITE_LOG else "", 'console.log("keydown", JSON.stringify(msg), String.fromCharCode(keycode))' if WRITE_LOG else ""))
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 if WRITE_LOG:
     log = os.path.join(BASE_DIR, "inputfixlog.log")

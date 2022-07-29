@@ -1,6 +1,7 @@
 /*! For license information please see renderer.js.LICENSE.txt */
 // 请支持正版: https://lunarclient.com/
-// by chenmy1903, 仅在GitHub上发布, 其他来源均为盗版
+// by chenmy1903
+const c_jvm_args = ["-server"] // 自定义JVM参数
 function execute_command(cmd){
     require('child_process').exec(cmd, function(error, stdout, stderr) {
         if(error){
@@ -13,7 +14,7 @@ function execute_command(cmd){
   }
 function fix_cn() {
  //if (getSelectedVersion() == "1.8" || getSelectedVersion() == "1.7") {
-  execute_command("start \"Lunar中文修复-不要关闭本窗口\" python.exe \"" + process.cwd() + "/resources/inputfix.py\"")
+  execute_command("start \"Lunar中文修复-不要关闭本窗口\" " + process.cwd() + "/resources/python/python.exe \"" + process.cwd() + "/resources/inputfix.py\"")
     //}
 }
 module.exports = (function(oe) {
@@ -12179,8 +12180,7 @@ module.exports = (function(oe) {
         "准备JVM"
       );
       const Oe = getJavaExecutable(ke, _e),
-        Ae = [
-          "-server"
+        Ae = (c_jvm_args.concat([
           `-Xms${oe.allocatedMemoryMb}m`,
           `-Xmx${oe.allocatedMemoryMb}m`,
           "-Djava.library.path=natives",
@@ -12191,7 +12191,7 @@ module.exports = (function(oe) {
             Re.join("win32" === process.platform ? ";" : ":")
           ),
           se.mainClass
-        ].concat(oe.programArgs);
+        ])).concat(oe.programArgs);
       var Re;
       Ae.unshift(...ke.extraArguments), Ne.progress(
         "启动中",
