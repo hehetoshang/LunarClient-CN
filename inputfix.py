@@ -5,6 +5,9 @@ import time
 import frida
 
 WRITE_LOG = False # 是否启用log(log没啥毛用,还会占磁盘空间,除非调试,否则保持关闭)
+print("检测游戏版本...")
+if not get_minecraft_version() in ["1.8", "1.7"]:
+    sys.exit()
 try:
     session = frida.attach("javaw.exe")
 except frida.ProcessNotFoundError:
@@ -110,12 +113,8 @@ def get_minecraft_version():
     return version
 
 script.on('message', on_message)
-print("检测游戏版本...")
-if get_minecraft_version() in ["1.8", "1.7"]:
-    print("将钩子勾上LunarClient...")
-    script.load() # 注入中文输入
-else:
-    sys.exit() # 1.12+已经修复
+print("将钩子勾上LunarClient...")
+script.load() # 注入中文输入
 print("中文修复开启成功")
 print("不要关闭本窗口,关闭后中文修复会失效")
 print("关闭游戏后中文修复会自动关闭 (测试版本, 可能有bug)")

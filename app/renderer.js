@@ -12049,7 +12049,7 @@ module.exports = (function(oe) {
             await Fe.promises.access(oe);
           } catch (se) {
             (Te = !0), ft.a.warn(
-              "File " + oe + " does not exist - redownloading JRE."
+              "文件 " + oe + " 不存在 - 重新下载中..."
             );
           }
       } catch (oe) {
@@ -12064,9 +12064,9 @@ module.exports = (function(oe) {
             (Te = se !== oe.javaExeChecksum),
             Te &&
               ft.a.warn(
-                "Java checksum is wrong, redownloading! (expected: " +
+                "发现被修改的Java, 重新下载中... (期望值: " +
                   oe.javaExeChecksum +
-                  ", actual: " +
+                  ", 现在: " +
                   se +
                   ")"
               )
@@ -12163,9 +12163,9 @@ module.exports = (function(oe) {
           Pt()(Te, {}, _e => {
             _e
               ? se({
-                  short: "Extract failed",
+                  short: "解压失败",
                   description:
-                    "Failed to extract natives. Is the game already running?"
+                    "解压运行库时失败, 是不是游戏正在运行"
                 })
               : Object(Fe.createReadStream)(ke)
                   .pipe(Nt.a.Extract({ path: Te }))
