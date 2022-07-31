@@ -5,6 +5,17 @@ import time
 import frida
 
 WRITE_LOG = False # 是否启用log(log没啥毛用,还会占磁盘空间,除非调试,否则保持关闭)
+def get_minecraft_version():
+    lunar_settings_ = os.path.join(os.path.expandvars("%USERPROFILE%"), ".lunarclient", "settings", "launcher.json")
+    if not os.path.isfile(lunar_settings_):
+        print("本中文修复仅适用于LunarClient")
+        input("回车键退出")
+        sys.exit()
+    with open(lunar_settings_, "r", encoding="utf-8") as f:
+        lunar_settings = f.read()
+    version = json.loads(lunar_settings)["selectedVersion"]
+    return version
+
 print("检测游戏版本...")
 if not get_minecraft_version() in ["1.8", "1.7"]:
     sys.exit()
@@ -100,17 +111,6 @@ def on_message(message, data):
     """写入日志"""
     if WRITE_LOG:
         print(message, file=logf)
-
-def get_minecraft_version():
-    lunar_settings_ = os.path.join(os.path.expandvars("%USERPROFILE%"), ".lunarclient", "settings", "launcher.json")
-    if not os.path.isfile(lunar_settings_):
-        print("本中文修复仅适用于LunarClient")
-        input("回车键退出")
-        sys.exit()
-    with open(lunar_settings_, "r", encoding="utf-8") as f:
-        lunar_settings = f.read()
-    version = json.loads(lunar_settings)["selectedVersion"]
-    return version
 
 script.on('message', on_message)
 print("将钩子勾上LunarClient...")
