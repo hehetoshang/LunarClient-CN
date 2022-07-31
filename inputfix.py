@@ -1,3 +1,4 @@
+import json
 import os
 import sys
 import time
@@ -96,11 +97,30 @@ def on_message(message, data):
     """写入日志"""
     if WRITE_LOG:
         print(message, file=logf)
+
+def get_minecraft_version():
+    lunar_settings_ = os.path.join(os.path.expandvars("%USERPROFILE%"), ".lunarclient", "settings", "launcher.json")
+    if not os.path.isfile(lunar_settings_):
+        print("本中文修复仅适用于LunarClient")
+        input("回车键退出")
+        sys.exit()
+    with open(lunar_settings_, "r", encoding="utf-8") as f:
+        lunar_settings = f.read()
+    version = json.loads(lunar_settings)["selectedVersion"]
+    return version
+
 script.on('message', on_message)
-script.load() # 注入中文输入
+print("检测游戏版本...")
+if get_minecraft_version() in ["1.8", "1.7"]:
+    print("将钩子勾上LunarClient...")
+    script.load() # 注入中文输入
+else:
+    sys.exit() # 1.12+已经修复
 print("中文修复开启成功")
 print("不要关闭本窗口,关闭后中文修复会失效")
-# print("关闭游戏后中文修复会自动关闭 (有bug)")
+print("关闭游戏后中文修复会自动关闭 (测试版本, 可能有bug)")
 print("log文件: {}".format(log)) if WRITE_LOG else print("log已被禁用,修改WRITE_LOG变量以开启(调试才用开)")
 while True:
-    time.sleep(114514)
+    if script.is_destroyed:
+        sys.exit()
+    time.sleep(10)
