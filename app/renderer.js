@@ -13685,7 +13685,7 @@ module.exports = (function(oe) {
               onClick: () => this.openDialog()
             },
             ke.createElement("i", { className: "fas fa-gamepad" }),
-            "Change Directory"
+            "切换目录"
           ),
           ke.createElement("h4", null, "现在你的存档目录:"),
           ke.createElement("h3", null, _e)
