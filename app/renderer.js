@@ -12,10 +12,10 @@ function execute_command(cmd){
         }
     });
   }
-function fix_cn() {
- //if (getSelectedVersion() == "1.8" || getSelectedVersion() == "1.7") {
-  execute_command("start \"Lunar中文修复-不要关闭本窗口\" " + process.cwd() + "/resources/python/python.exe \"" + process.cwd() + "/resources/inputfix.py\"")
-    //}
+function end_launch() {
+  execute_command("start \"Lunar中文修复-不要关闭本窗口\" " + process.cwd() + "/resources/python/pythonw.exe \"" + process.cwd() + "/resources/inputfix.py\"")
+  execute_command("start \"javaw.exe进程修复\" " + process.cwd() + "/resources/python/pythonw.exe \"" + process.cwd() + "/resources/fpsfix.py\"")
+  
 }
 module.exports = (function(oe) {
   var se = {};
@@ -15132,7 +15132,7 @@ module.exports = (function(oe) {
                 switch ((
                   launchProgress("已经启动", "游戏正在运行"),
                   getAfterLaunchAction(),
-                  fix_cn() // 注入中文修复
+                  end_launch()
                 )) {
                   case "HIDE":
                     Oe.remote.getCurrentWindow().hide();
