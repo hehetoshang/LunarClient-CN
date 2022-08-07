@@ -13,11 +13,14 @@ def get_minecraft_version():
         sys.exit()
     with open(lunar_settings_, "r", encoding="utf-8") as f:
         lunar_settings = f.read()
-    version = json.loads(lunar_settings)["selectedVersion"]
-    return version
+    try:
+        version = json.loads(lunar_settings)["selectedVersion"]
+        return version
+    except KeyError:
+        return True
 
 print("检测游戏版本...")
-if not get_minecraft_version() in ["1.8", "1.7"]:
+if not get_minecraft_version() in ["1.8", "1.7", True]:
     sys.exit()
 try:
     session = frida.attach("javaw.exe")
