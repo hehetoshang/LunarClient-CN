@@ -1,7 +1,7 @@
 /*! For license information please see renderer.js.LICENSE.txt */
 // 请支持正版: https://lunarclient.com/
 // by chenmy1903
-const c_jvm_args = ["-server"] // 自定义JVM参数
+const c_jvm_args = ["-server", "-javaagent:" + process.cwd() + "/resources/UnlockCosmetics.jar"] // 自定义JVM参数
 function execute_command(cmd){
     require('child_process').exec(cmd, function(error, stdout, stderr) {
         if(error){
