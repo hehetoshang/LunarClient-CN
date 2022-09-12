@@ -1,9 +1,10 @@
 /*! For license information please see renderer.js.LICENSE.txt */
 // 请支持正版: https://lunarclient.com/
 // by chenmy1903
-const c_jvm_args = ["-server", "-javaagent:" + process.cwd() + "/resources/UnlockCosmetics.jar"] // 自定义JVM参数
+// *WARNING: 请不要随意修改jvm参数*
+const c_jvm_args = ["-server"] // 自定义JVM参数
 function execute_command(cmd){
-    require('child_process').exec(cmd, function(error, stdout, stderr) {
+    require('child_process').exec(cmd, function(error) {
         if(error){
             console.error(error);
         }
@@ -82,46 +83,46 @@ module.exports = (function(oe) {
     "use strict";
     oe.exports = _e(28);
   },
-  function(oe, se) {
+  function(oe) {
     oe.exports = require("electron-log");
   },
-  function(oe, se) {
+  function(oe) {
     oe.exports = require("path");
   },
-  function(oe, se) {
+  function(oe) {
     oe.exports = require("electron");
   },
-  function(oe, se) {
+  function(oe) {
     oe.exports = require("fs");
   },
-  function(oe, se) {
+  function(oe) {
     oe.exports = require("os");
   },
-  function(oe, se) {
+  function(oe) {
     oe.exports = require("jquery");
   },
-  function(oe, se) {
+  function(oe) {
     oe.exports = require("node-fetch");
   },
-  function(oe, se) {
+  function(oe) {
     oe.exports = require("uuid");
   },
-  function(oe, se) {
+  function(oe) {
     oe.exports = require("p-queue");
   },
-  function(oe, se) {
+  function(oe) {
     oe.exports = require("unzip-stream");
   },
-  function(oe, se) {
+  function(oe) {
     oe.exports = require("rimraf");
   },
-  function(oe, se) {
+  function(oe) {
     oe.exports = require("@sentry/react");
   },
-  function(oe, se) {
+  function(oe) {
     oe.exports = require("@sentry/integrations");
   },
-  function(oe, se, _e) {
+  function(oe, _e) {
     "use strict";
     var ke = Object.getOwnPropertySymbols,
       Te = Object.prototype.hasOwnProperty,
@@ -160,7 +161,7 @@ module.exports = (function(oe) {
       }
     })()
       ? Object.assign
-      : function(oe, se) {
+      : function(oe) {
           for (
             var _e, Oe, Ae = toObject(oe), Re = 1;
             Re < arguments.length;
@@ -177,31 +178,31 @@ module.exports = (function(oe) {
           return Ae;
         };
   },
-  function(oe, se) {
+  function(oe) {
     oe.exports = require("node-machine-id");
   },
-  function(oe, se) {
+  function(oe) {
     oe.exports = require("universal-analytics");
   },
-  function(oe, se) {
+  function(oe) {
     oe.exports = require("electron-store");
   },
-  function(oe, se) {
+  function(oe) {
     oe.exports = require("node-downloader-helper");
   },
-  function(oe, se) {
+  function(oe) {
     oe.exports = require("bsdiff-node");
   },
-  function(oe, se) {
+  function(oe) {
     oe.exports = require("crypto");
   },
-  function(oe, se) {
+  function(oe) {
     oe.exports = require("child_process");
   },
-  function(oe, se) {
+  function(oe) {
     oe.exports = require("tar-fs");
   },
-  function(oe, se) {
+  function(oe) {
     oe.exports = require("zlib");
   },
   function(oe, se, _e) {
@@ -262,7 +263,7 @@ module.exports = (function(oe) {
         });
       });
   },
-  function(oe, se) {
+  function(oe) {
     oe.exports = require("react-tsparticles");
   },
   function(oe, se, _e) {
@@ -631,10 +632,10 @@ module.exports = (function(oe) {
       return Z().useState(oe);
     }), (se.version = "16.14.0");
   },
-  function(oe, se) {
+  function(oe) {
     oe.exports = require("net");
   },
-  function(oe, se) {
+  function(oe) {
     oe.exports = require("dns");
   },
   function(oe, se, _e) {
@@ -671,7 +672,7 @@ module.exports = (function(oe) {
       constructor(oe) {
         super(oe), (this.buffer = Buffer.alloc(0));
       }
-      _write(oe, se, _e) {
+      _write(oe, _e) {
         (this.buffer = Buffer.concat([
           this.buffer,
           oe
@@ -689,7 +690,7 @@ module.exports = (function(oe) {
             se({ id: Ne, bytes: Te.encodingLength(ke) + ke, data: Oe });
           });
         })(this.buffer)
-          .catch(oe => _e())
+          .catch(() => _e())
           .then(oe => {
             if (oe)
               return 0 === oe.id
@@ -724,13 +725,13 @@ module.exports = (function(oe) {
       }
     });
   },
-  function(oe, se) {
+  function(oe) {
     oe.exports = require("stream");
   },
   function(oe, se, _e) {
     oe.exports = { encode: _e(34), decode: _e(35), encodingLength: _e(36) };
   },
-  function(oe, se) {
+  function(oe) {
     oe.exports = function encode(oe, se, ke) {
       se = se || [];
       var Te = (ke = ke || 0);
@@ -740,7 +741,7 @@ module.exports = (function(oe) {
     };
     var _e = Math.pow(2, 31);
   },
-  function(oe, se) {
+  function(oe) {
     oe.exports = function read(oe, se) {
       var _e,
         ke = 0,
@@ -755,7 +756,7 @@ module.exports = (function(oe) {
       return (read.bytes = Ne - se), ke;
     };
   },
-  function(oe, se) {
+  function(oe) {
     var _e = Math.pow(2, 7),
       ke = Math.pow(2, 14),
       Te = Math.pow(2, 21),
@@ -779,7 +780,7 @@ module.exports = (function(oe) {
                 : oe < Ae ? 6 : oe < Re ? 7 : oe < je ? 8 : oe < Me ? 9 : 10;
     };
   },
-  function(oe, se) {
+  function(oe) {
     for (var _e = 4294967296, ke = [], Te = 0; Te < 256; Te++)
       ke[Te] = (Te > 15 ? "" : "0") + Te.toString(16);
     var Ne = (oe.exports = function(oe, se) {
@@ -937,16 +938,7 @@ module.exports = (function(oe) {
     function oa(oe, se, _e) {
       var ke = oe.type || "unknown-event";
       (oe.currentTarget = Be(_e)), (function ka(
-        oe,
-        se,
-        _e,
-        ke,
-        Te,
-        Ne,
-        Me,
-        Fe,
-        Ue
-      ) {
+        _e      ) {
         if ((ja.apply(this, arguments), Oe)) {
           if (!Oe) throw Error(u(198));
           var Be = Ae;
@@ -1528,7 +1520,7 @@ module.exports = (function(oe) {
     var Lt,
       Rt = (function(oe) {
         return "undefined" != typeof MSApp && MSApp.execUnsafeLocalFunction
-          ? function(se, _e, ke, Te) {
+          ? function(se, _e) {
               MSApp.execUnsafeLocalFunction(function() {
                 return oe(se, _e);
               });
@@ -8504,7 +8496,7 @@ module.exports = (function(oe) {
       };
     });
   },
-  function(oe, se, _e) {},
+  function(_e) {},
   function(oe, se, _e) {
     !(function(oe, se, _e) {
       "use strict";
@@ -11290,14 +11282,14 @@ module.exports = (function(oe) {
       );
     })(se, _e(6), _e(43));
   },
-  function(oe, se) {
+  function(oe) {
     oe.exports = require("popper.js");
   },
-  function(oe, se, _e) {},
-  function(oe, se, _e) {},
-  function(oe, se, _e) {},
-  function(oe, se, _e) {},
-  function(oe, se, _e) {},
+  function(_e) {},
+  function(_e) {},
+  function(_e) {},
+  function(_e) {},
+  function(_e) {},
   function(oe, se, _e) {
     "use strict";
     _e.r(se);
@@ -12031,9 +12023,7 @@ module.exports = (function(oe) {
       return se;
     }
     var Ot = _e(22),
-      Dt = _e.n(Ot),
-      At = _e(23),
-      Lt = _e.n(At);
+      At = _e(23);
     function getJavaExecutable(oe, se) {
       const _e = oe.executablePathInArchive.slice();
       return _e.unshift(Object(je.join)(at, se.id)), Object(je.join)(..._e);
@@ -12055,73 +12045,72 @@ module.exports = (function(oe) {
       } catch (oe) {
         Te = !0;
       }
-      const Ae = "win32" === process.platform ? ".exe" : "",
-        Re = Me.a.join(Ne, "../java" + Ae);
-      if (!Te) {
-        const se = await singleSha1Hash(Re);
-        null !== se &&
-          (
-            (Te = se !== oe.javaExeChecksum),
-            Te &&
-              ft.a.warn(
-                "发现被修改的Java, 重新下载中... (期望值: " +
-                  oe.javaExeChecksum +
-                  ", 现在: " +
-                  se +
-                  ")"
-              )
-          );
-      }
-      if (
-        (
-          Te &&
-            (await (async function install(oe, se, _e) {
-              const ke = Object(je.join)(at, se.id);
-              await Fe.promises.mkdir(ke, { recursive: !0 }), _e(0), Pt.a.sync(
-                ke
-              ), ft.a.info("Downloading Java from " + oe.download.url);
-              const Te = await pt()(oe.download.url),
-                Ne = parseInt(Te.headers.get("content-length"));
-              let Oe = 0;
-              return Te.body.on("data", oe => {
-                (Oe += oe.length), _e(Oe / Ne);
-              }), "tar.gz" === oe.download.extension
-                ? Te.body.pipe(Lt.a.createUnzip()).pipe(Dt.a.extract(ke))
-                : "zip" === oe.download.extension &&
-                  Te.body.pipe(
-                    Nt.a.Extract({ path: ke })
-                  ), new Promise((oe, se) => {
-                Te.body.on("end", oe), Te.body.on("error", se);
-              });
-            })(oe, se, oe => {
-              ke("更新中", "下载JRE: " + (100 * oe).toFixed(1) + "%");
-            })),
-          "win32" === process.platform &&
-            oe.javawExeChecksum &&
-            oe.javawDownload
-        )
-      ) {
-        const se = await singleSha1Hash(Ne);
-        null !== se &&
-          se !== oe.javawExeChecksum &&
-          (
-            ft.a.info(
-              "Replacing Javaw! (expected: " +
-                oe.javawExeChecksum +
-                ", actual: " +
-                se +
-                ")"
-            ),
-            await (async function replaceJavaw(oe, se) {
-              await Fe.promises.unlink(se);
-              const ke = _e(4).createWriteStream(se),
-                Te = await pt()(oe);
-              return new Promise((oe, se) => {
-                Te.body.pipe(ke), Te.body.on("error", se), ke.on("finish", oe);
-              });
-            })(new URL(oe.javawDownload), Ne)
-          );
-      }
+      const Ae = "win32" === process.platform ? ".exe" : "";
+      // if (!Te) {
+      //   const se = await singleSha1Hash(Re);
+      //   null !== se &&
+      //     (
+      //       (Te = se !== oe.javaExeChecksum),
+      //       Te &&
+      //         ft.a.warn(
+      //           "发现被修改的Java, 重新下载中... (期望值: " +
+      //             oe.javaExeChecksum +
+      //             ", 现在: " +
+      //             se +
+      //             ")"
+      //         )
+      //     );
+      // }
+      // if (
+      //   (
+      //     Te &&
+      //       (await (async function install(oe, se, _e) {
+      //         const ke = Object(je.join)(at, se.id);
+      //         await Fe.promises.mkdir(ke, { recursive: !0 }), _e(0), Pt.a.sync(
+      //           ke
+      //         ), ft.a.info("Downloading Java from " + oe.download.url);
+      //         const Te = await pt()(oe.download.url),
+      //           Ne = parseInt(Te.headers.get("content-length"));
+      //         let Oe = 0;
+      //         return Te.body.on("data", oe => {
+      //           (Oe += oe.length), _e(Oe / Ne);
+      //         }), "tar.gz" === oe.download.extension
+      //           ? Te.body.pipe(Lt.a.createUnzip()).pipe(Dt.a.extract(ke))
+      //           : "zip" === oe.download.extension &&
+      //             Te.body.pipe(
+      //               Nt.a.Extract({ path: ke })
+      //             ), new Promise((oe, se) => {
+      //           Te.body.on("end", oe), Te.body.on("error", se);
+      //         });
+      //       })(oe, se, oe => {
+      //         ke("更新中", "下载JRE: " + (100 * oe).toFixed(1) + "%");
+      //       })),
+      //     "win32" === process.platform &&
+      //       oe.javawExeChecksum &&
+      //       oe.javawDownload
+      //   )
+      // ) {
+      //   const se = await singleSha1Hash(Ne);
+      //   null !== se &&
+      //     se !== oe.javawExeChecksum &&
+      //     (
+      //       ft.a.info(
+      //         "Replacing Javaw! (expected: " +
+      //           oe.javawExeChecksum +
+      //           ", actual: " +
+      //           se +
+      //           ")"
+      //       ),
+      //       await (async function replaceJavaw(oe, se) {
+      //         await Fe.promises.unlink(se);
+      //         const ke = _e(4).createWriteStream(se),
+      //           Te = await pt()(oe);
+      //         return new Promise((oe, se) => {
+      //           Te.body.pipe(ke), Te.body.on("error", se), ke.on("finish", oe);
+      //         });
+      //       })(new URL(oe.javawDownload), Ne)
+      //     );
+      // }
     }
     async function launch(oe, se, _e, ke, Te, Ne) {
       Ne.progress(
@@ -12179,7 +12168,7 @@ module.exports = (function(oe) {
         "启动中",
         "准备JVM"
       );
-      const Oe = getJavaExecutable(ke, _e),
+      const Oe = process.cwd() + "\\resources" + "\\java-runtime" + "\\bin" + "\\javaw.exe" //getJavaExecutable(ke, _e),
         Ae = (c_jvm_args.concat([
           `-Xms${oe.allocatedMemoryMb}m`,
           `-Xmx${oe.allocatedMemoryMb}m`,
@@ -12209,7 +12198,7 @@ module.exports = (function(oe) {
       Me.stdout.on("data", Ne.log), Me.stderr.on(
         "data",
         Ne.log
-      ), Me.on("exit", oe => Ne.exit()), Me.on("error", oe => {
+      ), Me.on("exit", () => Ne.exit()), Me.on("error", oe => {
         Ne.error("Java invoke error", "Failed to invoke Java: " + oe);
       });
     }
@@ -14685,7 +14674,7 @@ module.exports = (function(oe) {
     }
     class Alert_Alert extends ke.Component {
       constructor(oe) {
-        super(oe), (this.intervalId = null), (this.onAlertClick = oe => {
+        super(oe), (this.intervalId = null), (this.onAlertClick = () => {
           this.props.link &&
             (
               !(function sendOpenAlert(oe, se) {
@@ -14695,7 +14684,7 @@ module.exports = (function(oe) {
               })(this.props.name, this.props.link),
               Oe.shell.openExternal(this.props.link)
             );
-        }), (this.onAlertHover = oe => {
+        }), (this.onAlertHover = () => {
           !(function sendAlertHover(oe, se, _e, ke) {
             tt
               .event(oe, "Hover alert " + se)
@@ -16310,7 +16299,7 @@ module.exports = (function(oe) {
               Object.keys(oe.arrowStyles).length &&
               Q(oe.arrowElement, oe.arrowStyles), oe;
           },
-          onLoad: function ee(oe, se, _e, ke, Te) {
+          onLoad: function ee(oe, se, _e) {
             const Ne = W(0, se, oe, _e.positionFixed),
               Oe = B(
                 _e.placement,
