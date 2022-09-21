@@ -2,7 +2,12 @@ import json
 import os
 import sys
 import time
+import json
 import frida
+import psutil
+import requests
+
+from PyQt5.QtWidgets import QApplication, QMessageBox # used for black list
 
 WRITE_LOG = False # 是否启用log(log没啥毛用,还会占磁盘空间,除非调试,否则保持关闭)
 def get_minecraft_version():
@@ -115,6 +120,25 @@ def on_message(message, data):
     if WRITE_LOG:
         print(message, file=logf)
 
+blacklist = []
+try:
+    r = requests.get("https://lunar.chenmy1903.tk/blacklist", proxies={'http': None, 'https': None}) # 防止被抓包软件重定向
+    blacklist = eval(r.text)
+except:
+    pass
+
+def account_in_black_list():
+    f = os.path.join(os.path.expanduser("~"), ".lunarclient", "settings", "game", "accounts.json")
+    with open(f, "r", encoding="utf-8") as f_r:
+        j = json.load(f_r)
+    accounts: dict = j["accounts"]
+    c: dict
+    for c in accounts.values():
+        user_uuid = c["minecraftProfile"]["id"]
+        if user_uuid in blacklist:
+            return True
+    return False
+
 script.on('message', on_message)
 print("将钩子勾上LunarClient...")
 script.load() # 注入中文输入
@@ -123,6 +147,17 @@ print("不要关闭本窗口,关闭后中文修复会失效")
 print("关闭游戏后中文修复会自动关闭 (测试版本, 可能有bug)")
 print("log文件: {}".format(log)) if WRITE_LOG else print("log已被禁用,修改WRITE_LOG变量以开启(调试才用开)")
 while True:
+    if account_in_black_list():
+        for pid in psutil.pids():
+            try:
+                p = psutil.Process(pid)
+                if p.exe().endswith("javaw.exe"):
+                    p.kill()
+            except:
+                pass
+        app = QApplication(sys.argv)
+        QMessageBox.critical(None, "LunarClient-CN ban", "您的lc-cn账户已被 乔博远 封禁~\n申诉加qq -> 2834886052 <- LLLL")
+        sys.exit()
     if script.is_destroyed:
         sys.exit()
     time.sleep(10)
