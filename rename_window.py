@@ -1,6 +1,7 @@
 # 修改游戏标题至Lunar Client CN (版本号)
 # import os
 import random
+import sys
 import time
 # import json
 import win32api
@@ -19,9 +20,10 @@ motds = [
 ] + (["Pls a rank because today is 11/7!"] if (time_now.tm_mday == 7 and time_now.tm_mon == 11) else [])
 
 old_title = ""
+inited = False
 
 def set_title():
-    global old_title
+    global old_title, inited
     windows_list = []
     win32gui.EnumWindows(lambda hWnd, param: param.append(hWnd), windows_list)
     for window in windows_list:
@@ -34,6 +36,8 @@ def set_title():
             motd = random.choice(motds)
             win32api.SendMessage(window,win32con.WM_SETTEXT,0,"Lunar Client CN" + old_title.replace("Lunar Client", "") + " | " + motd)
             return True
+    if not inited:
+        sys.exit()
 
 
 def main():
