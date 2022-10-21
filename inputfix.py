@@ -13,9 +13,7 @@ WRITE_LOG = False # 是否启用log(log没啥毛用,还会占磁盘空间,除非
 def get_minecraft_version():
     lunar_settings_ = os.path.join(os.path.expandvars("%USERPROFILE%"), ".lunarclient", "settings", "launcher.json")
     if not os.path.isfile(lunar_settings_):
-        print("本中文修复仅适用于LunarClient")
-        input("回车键退出")
-        sys.exit()
+        return True
     with open(lunar_settings_, "r", encoding="utf-8") as f:
         lunar_settings = f.read()
     try:

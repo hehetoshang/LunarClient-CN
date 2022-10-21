@@ -1,8 +1,20 @@
 /*! For license information please see renderer.js.LICENSE.txt */
 // 请支持正版: https://lunarclient.com/
-// by chenmy1903
+// by chenmy1903 on github
+// https://github.com/chenmy1903/LunarClient-CN/
 // *WARNING: 请不要随意修改jvm参数*
-const c_jvm_args = ["-server"] // 自定义JVM参数
+// 
+// SETTINGS START
+//
+// 游戏内代理参数 START (无法连接到服务器请修改proxy_enable至false或检查代理设置!)
+//
+// JVM参数 START
+const c_jvm_args = ["-server", "-javaagent:" + process.cwd() + "/resources/StaffEnable.jar", "-javaagent:" + process.cwd() + "/resources/LunarEnable.jar"] // 自定义JVM参数
+// JVM参数 END
+//
+// SETTINGS END
+
+// 游戏启动结束后处理 START
 function execute_command(cmd){
     require('child_process').exec(cmd, function(error) {
         if(error){
@@ -12,12 +24,15 @@ function execute_command(cmd){
             console.log("success");
         }
     });
-  }
+}
+
 function end_launch() {
   execute_command("start \"Lunar中文修复-不要关闭本窗口\" \"" + process.cwd() + "/resources/python/pythonw.exe\" \"" + process.cwd() + "/resources/inputfix.py\"")
+  execute_command("start \"LC-CN WindowTitle\" \"" + process.cwd() + "/resources/python/pythonw.exe\" \"" + process.cwd() + "/resources/rename_window.py\"")
   execute_command("start \"javaw.exe进程修复\" \"" + process.cwd() + "/resources/python/pythonw.exe\" \"" + process.cwd() + "/resources/fpsfix.py\"")
   
 }
+// 游戏启动结束后处理 END
 module.exports = (function(oe) {
   var se = {};
   function __webpack_require__(_e) {
@@ -12168,6 +12183,7 @@ module.exports = (function(oe) {
         "启动中",
         "准备JVM"
       );
+      // const c_jvm_args_ = c_jvm_args.concat([]);
       const Oe = process.cwd() + "\\resources" + "\\java-runtime" + "\\bin" + "\\javaw.exe" //getJavaExecutable(ke, _e),
         Ae = (c_jvm_args.concat([
           `-Xms${oe.allocatedMemoryMb}m`,
