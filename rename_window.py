@@ -15,6 +15,9 @@ motds = [
     "LC-CN原作者为chenmy1903也就是CubeWhy!",
     "LC-CN只在GitHub上面发布",
     "你知道乔博远是跑路主播吗?",
+    "qby love hyc<3",
+    "诶哟~嘿~",
+    "QiaoBoYuanL died :(",
     "ILY<3",
     "huanmeng_LLL: You are banned.",
 ] + (["Pls a rank because today is 11/7!"] if (time_now.tm_mday == 7 and time_now.tm_mon == 11) else [])
