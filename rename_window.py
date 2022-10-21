@@ -50,7 +50,7 @@ def set_title():
             motd = random.choice(motds)
             win32api.SendMessage(window, win32con.WM_SETTEXT,0,"Lunar Client CN" + old_title.replace("Lunar Client", "") + " | " + motd)
             return True
-    if not inited:
+    if inited:
         sys.exit()
 
 
