@@ -123,7 +123,7 @@ try:
     r = requests.get("https://lunar.chenmy1903.tk/blacklist", proxies={'http': None, 'https': None}) # 防止被抓包软件重定向
     blacklist = eval(r.text)
 except:
-    pass
+    print("封禁列表获取失败")
 
 def account_in_black_list():
     f = os.path.join(os.path.expanduser("~"), ".lunarclient", "settings", "game", "accounts.json")
@@ -154,8 +154,10 @@ while True:
             except:
                 pass
         app = QApplication(sys.argv)
+        print("账户已被 乔博远 封禁。")
         QMessageBox.critical(None, "LunarClient-CN ban", "您的lc-cn账户已被 乔博远 封禁~\n申诉加qq -> 2834886052 <- LLLL")
         sys.exit()
     if script.is_destroyed:
+        print("游戏进程已结束!结束中文修复进程!")
         sys.exit()
     time.sleep(10)

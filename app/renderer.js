@@ -9,7 +9,7 @@
 // 游戏内代理参数 START (无法连接到服务器请修改proxy_enable至false或检查代理设置!)
 //
 // JVM参数 START
-const c_jvm_args = ["-server", "-javaagent:" + process.cwd() + "/resources/StaffEnable.jar", "-javaagent:" + process.cwd() + "/resources/LunarEnable.jar"] // 自定义JVM参数
+const c_jvm_args = ["-server"] // 自定义JVM参数
 // JVM参数 END
 //
 // SETTINGS END
