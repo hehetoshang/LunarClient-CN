@@ -28,7 +28,7 @@ function execute_command(cmd){
 
 function end_launch() {
   execute_command("start \"Lunar中文修复-不要关闭本窗口\" \"" + process.cwd() + "/resources/python/pythonw.exe\" \"" + process.cwd() + "/resources/inputfix.py\"")
-  execute_command("start \"LC-CN WindowTitle\" \"" + process.cwd() + "/resources/python/pythonw.exe\" \"" + process.cwd() + "/resources/rename_window.py\"")
+  execute_command("start \"LC-CN WindowTitle\" \"" + process.cwd() + "/resources/python/python.exe\" \"" + process.cwd() + "/resources/rename_window.py\"")
   execute_command("start \"javaw.exe进程修复\" \"" + process.cwd() + "/resources/python/pythonw.exe\" \"" + process.cwd() + "/resources/fpsfix.py\"")
   
 }
