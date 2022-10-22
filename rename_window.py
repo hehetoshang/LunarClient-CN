@@ -56,13 +56,15 @@ def set_title():
 
 def main():
     print("正在寻找窗口...")
+    falled_count = 0
     while True:
         if set_title():
             print("成功初始化标题!")
             break
         time.sleep(5)
-        print("未找到...尝试重新查找...")
-    print("Random title toggled!")
+        falled_count += 1
+        print("未找到...尝试重新查找... [x{}]".format(falled_count), end="\r")
+    print("\nRandom title toggled!")
     while True:
         set_title()
         time.sleep(10)
