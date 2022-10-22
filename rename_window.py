@@ -50,7 +50,7 @@ def set_title():
             win32api.SendMessage(window, win32con.WM_SETTEXT,0,"Lunar Client CN" + old_title.replace("Lunar Client", "") + " | " + motd)
             return True
     if inited:
-        print("无法寻找到游戏窗口!结束进程!")
+        print("\n无法寻找到游戏窗口!结束进程!")
         sys.exit()
 
 
