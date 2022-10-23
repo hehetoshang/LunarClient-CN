@@ -37,18 +37,17 @@ def set_title():
     windows_list = []
     win32gui.EnumWindows(lambda hWnd, param: param.append(hWnd), windows_list)
     for window in windows_list:
-        # classname = win32gui.GetClassName(window)
+        classname = win32gui.GetClassName(window)
         title: str = win32gui.GetWindowText(window)
-        # print(f'classname:{classname} title:{title}')
-        if "Lunar Client" in title:
-            inited = True
-            s_count += 1
-            print("成功定位游戏窗口! [x{}]".format(s_count), end="\r")
-            if old_title == "":
-                old_title = title
-            motd = random.choice(motds)
-            win32api.SendMessage(window, win32con.WM_SETTEXT,0,"Lunar Client CN" + old_title.replace("Lunar Client", "") + " | " + motd)
-            return True
+        if "Lunar Client" in title and classname == "LWJGL":
+                inited = True
+                s_count += 1
+                print("成功定位游戏窗口! [x{}]".format(s_count), end="\r")
+                if old_title == "":
+                    old_title = title
+                motd = random.choice(motds)
+                win32api.SendMessage(window, win32con.WM_SETTEXT,0,"Lunar Client CN" + old_title.replace("Lunar Client", "") + " | " + motd)
+                return True
     if inited:
         print("\n无法寻找到游戏窗口!结束进程!")
         sys.exit()
