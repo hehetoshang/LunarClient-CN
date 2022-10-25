@@ -19,13 +19,13 @@
 
 > Leave a star pls, I really need it
 
-[点击此处](https://github.com/chenmy1903/LunarClient/releases)
+[点击此处](https://github.com/chenmy1903/LunarClient-CN/releases)
 
 ## 这是什么
 
-> 中文修复感谢[sduoduo233](https://github.com/sduoduo233/LunarInputFix)的代码
+> 中文修复感谢[sduoduo233](https://github.com/sduoduo233/LunarInputFix)的代码, 感谢LunarClient-QT的全饰品解锁jar, 感谢[lunarclient.com](https://lunarclient.com)的LC启动器
 
-因为低版本的Minecraft无法输入中文, 这是一个Lunar Client的插件, 可以解决中文修复问题
+因为低版本的Minecraft无法输入中文, 这是一个Lunar Client的修改版, 可以解决中文修复问题
 
 ## 快捷方式教程
 
