@@ -28,9 +28,12 @@ if not get_minecraft_version() in ["1.8", "1.7", True]:
 try:
     session = frida.attach("javaw.exe")
 except frida.ProcessNotFoundError:
-    print("未找到javaw.exe, 启动游戏后在开启中文修复")
-    input("回车退出程序")
-    sys.exit()
+    print("尝试寻找java.exe")
+    try:
+        session = frida.attach("java.exe")
+    except frida.ProcessNotFoundError:
+        print("未找到任何正在运行的java, 启动游戏后在开启中文修复")
+        sys.exit()
 script = session.create_script("""
 function readMessage(p){
     var hwnd = p.readPointer()
@@ -118,14 +121,18 @@ def on_message(message, data):
     if WRITE_LOG:
         print(message, file=logf)
 
-blacklist = []
-try:
-    r = requests.get("https://lunar.chenmy1903.tk/blacklist", proxies={'http': None, 'https': None}) # 防止被抓包软件重定向
-    blacklist = eval(r.text)
-except:
-    print("封禁列表获取失败")
+def get_banned():
+    blacklist = []
+    try:
+        r = requests.get("https://chenmy1903.github.io/LunarClient-CN/blacklist", proxies={'http': None, 'https': None}) # 防止被抓包软件重定向
+        blacklist = eval(r.text)
+    except:
+        print("封禁列表获取失败")
+    return blacklist
 
-def account_in_black_list():
+blacklist = get_banned()
+
+def account_in_black_list(bl):
     f = os.path.join(os.path.expanduser("~"), ".lunarclient", "settings", "game", "accounts.json")
     with open(f, "r", encoding="utf-8") as f_r:
         j = json.load(f_r)
@@ -133,9 +140,9 @@ def account_in_black_list():
     c: dict
     for c in accounts.values():
         user_uuid = c["minecraftProfile"]["id"]
-        if user_uuid in blacklist:
-            return True
-    return False
+        if user_uuid in bl:
+            return True, bl[user_uuid], user_uuid, c["minecraftProfile"]["name"]
+    return False, ""
 
 script.on('message', on_message)
 print("将钩子勾上LunarClient...")
@@ -144,20 +151,33 @@ print("中文修复开启成功")
 print("不要关闭本窗口,关闭后中文修复会失效")
 print("关闭游戏后中文修复会自动关闭 (测试版本, 可能有bug)")
 print("log文件: {}".format(log)) if WRITE_LOG else print("log已被禁用,修改WRITE_LOG变量以开启(调试才用开)")
+
+ban_end = """反正是开源的,你自己给自己unban也不是不行
+不会unban还是去买iqbooster罢
+LL
+"""
+reason = "原因?什么原因啊!CubeWhy肯定不会神权的, 又不是huanmeng"
+
 while True:
-    if account_in_black_list():
+    banned = account_in_black_list(blacklist)
+    if banned[0]:
         for pid in psutil.pids():
             try:
                 p = psutil.Process(pid)
-                if p.exe().endswith("javaw.exe"):
+                if p.exe().endswith("javaw.exe") or p.exe().endswith("java.exe") or p.exe().endswith("Lunar Client CN.exe") or p.exe().endswith("Lunar Client.exe"):
                     p.kill()
             except:
                 pass
         app = QApplication(sys.argv)
-        print("账户已被 乔博远 封禁。")
-        QMessageBox.critical(None, "LunarClient-CN ban", "您的lc-cn账户已被 乔博远 封禁~\n申诉加qq -> 2834886052 <- LLLL")
+        print("账户已被封禁。")
+        reason = banned[1]["reason"] if "reason" in banned[1] else reason
+        ban_end = banned[1]["ban_end"] if "ban_end" in banned[1] else ban_end
+        u_id = banned[2]
+        u_nick = banned[3]
+        QMessageBox.critical(None, "LunarClient-CN ban", "你的lc-cn账户已被封禁~\n申诉加QQ(大概率不解封) -> 2834886052 <-\nPlayer: {}\nUUID: {}\n原因: {}\n{}\n{}\n{}".format(u_nick, u_id, reason, len(ban_end) * "-", ban_end, len(ban_end) * "-"))
         sys.exit()
     if script.is_destroyed:
         print("游戏进程已结束!结束中文修复进程!")
         sys.exit()
     time.sleep(10)
+    blacklist = get_banned()
