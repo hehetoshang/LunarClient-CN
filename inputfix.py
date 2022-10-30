@@ -26,9 +26,10 @@ print("检测游戏版本...")
 if not get_minecraft_version() in ["1.8", "1.7", True]:
     sys.exit()
 try:
+    print("寻找javaw.exe")
     session = frida.attach("javaw.exe")
 except frida.ProcessNotFoundError:
-    print("尝试寻找java.exe")
+    print("没有寻找到javaw.exe, 尝试寻找java.exe")
     try:
         session = frida.attach("java.exe")
     except frida.ProcessNotFoundError:
