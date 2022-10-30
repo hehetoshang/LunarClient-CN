@@ -2,17 +2,21 @@
 
 > Write in Chinese
 
+## 我们正在准备跑路(2022/10/26)
+
+> 现在和平了...也不可能跑路, 后面lc-cn里边的敏感内容都会删掉了（就像f11 notlegit）
+
 ## 下载
 
 > Leave a star pls, I really need it
 
-[点击此处](https://github.com/chenmy1903/LunarClient/releases)
+[点击此处](https://github.com/chenmy1903/LunarClient-CN/releases)
 
 ## 这是什么
 
-> 中文修复感谢[sduoduo233](https://github.com/sduoduo233/LunarInputFix)的代码
+> 中文修复感谢[sduoduo233](https://github.com/sduoduo233/LunarInputFix)的代码, 感谢LunarClient-QT的全饰品解锁jar, 感谢[lunarclient.com](https://lunarclient.com)的LC启动器
 
-因为低版本的Minecraft无法输入中文, 这是一个Lunar Client的插件, 可以解决中文修复问题
+因为低版本的Minecraft无法输入中文, 这是一个Lunar Client的修改版, 可以解决中文修复问题
 
 ## 快捷方式教程
 
@@ -34,11 +38,15 @@
 
 ### 会ban吗
 
-不会
+不会, 除非你注入了或被staff神权了.
 
 ### 有后门吗
 
-没有, 开放源代码, 可以去看
+没有, 开放源代码, 可以去看, 一切说LC-CN有后门的均为乐子.
+
+### 会跑路吗
+
+不会的, 上面的那个只是整活而已, 但是只是不在qq发了而已.
 
 ## 更新日志
 
@@ -82,8 +90,6 @@
 ### v2.11.2-fix4
 
 1. 修复未定义的函数导致中文修复注入失败的错误
-2. 增加官网: [lunar.chenmy1903.tk](https://lunar.chenmy1903.tk)
-3. 仓库更名为`LunarClient-CN`
 
 ### v2.11.2-fix3
 
@@ -130,6 +136,6 @@
 
 ### v2.10.1-old1
 
-> bug贼多的版本, 本版本并没有开源, 且只在cnv工会qq群发布过
+> bug贼多的版本, 本版本并没有开源
 
 1. 汉化About界面
