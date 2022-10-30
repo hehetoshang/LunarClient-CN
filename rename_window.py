@@ -11,7 +11,6 @@ import win32con
 time_now = time.localtime(time.time())
 
 motds = [
-    "do /g join AllForLove, MTL are Losers",
     "LC-CN原作者为chenmy1903也就是CubeWhy!",
     "LC-CN只在GitHub上面发布",
     "qby love hyc<3",
@@ -25,7 +24,6 @@ motds = [
     "ILY<3",
     "github.com/XiaoHeiPa - XiaoHeiPa Official GitHub!",
     "Sub to 兰方翔Official on bilibili!",
-    "huanmeng_LLL: You are banned.",
 ] + (["Pls a rank because today is 11/6!"] if (time_now.tm_mday == 6 and time_now.tm_mon == 11) else [])
 
 old_title = ""

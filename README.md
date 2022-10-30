@@ -2,10 +2,6 @@
 
 > Write in Chinese
 
-## 我们正在准备跑路(2022/10/26)
-
-> 现在和平了...也不可能跑路, 后面lc-cn里边的敏感内容都会删掉了（就像f11 notlegit）
-
 ## 下载
 
 > Leave a star pls, I really need it
@@ -44,13 +40,30 @@
 
 没有, 开放源代码, 可以去看, 一切说LC-CN有后门的均为乐子.
 
-### 会跑路吗
+## 乐子封禁
 
-不会的, 上面的那个只是整活而已, 但是只是不在qq发了而已.
+1. 封禁LuckyInLove_因为跑路/实名/MoreThanLucky are banned
+2. 封禁Evecat114514
+3. 封禁LianBeans因为MoreThanLucky are banned
+4. 封禁LolQiQi_因为跑路/开外挂boosting CubeWhy(幸好用小号玩的,要不我大号没了L)
+5. 封禁Alyars因为MoreThanLucky are banned
+6. 封禁cmy_love_lan因为实名/跑路/辱骂他人/开安全黑客
+7. 封禁xiaojin0318因为NM$L玩bw打到一半逃逸
+
+## 封禁更新
+
+1. 增加原因
+2. 增加PlayerNick和PlayerUUID
 
 ## 更新日志
 
 > 全饰品版本不会受到支持
+
+### v2.11.2-fix11
+
+1. 修复了中文修复的bug
+2. 完善了封禁系统 (具体更新见[此处](#封禁更新))
+3. 增加了修改窗口标题
 
 ### v2.11.2-fix10
 
