@@ -24,7 +24,7 @@ motds = [
     "ILY<3",
     "github.com/XiaoHeiPa - XiaoHeiPa Official GitHub!",
     "Sub to 兰方翔Official on bilibili!",
-] + (["Pls a rank because today is 11/6!"] if (time_now.tm_mday == 6 and time_now.tm_mon == 11) else [])
+] + (["Pls a rank because today is 11/7!"] if (time_now.tm_mday == 7 and time_now.tm_mon == 11) else [])
 
 old_title = ""
 inited = False
