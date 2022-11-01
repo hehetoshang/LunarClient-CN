@@ -64,6 +64,7 @@
 1. 可以增加自定义助理(省的天天上传全饰品, 不需要iq就可以增加)
 2. 移除启动报错自动报告, 防止LunarClient-CN死的太快
 3. 将启动处理交给client.py而不是LunarClient启动器
+4. 把启动交给lccnlauncher而不是lunarlauncher
 
 ### v2.11.2-fix11
 

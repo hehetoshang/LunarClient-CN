@@ -25,15 +25,44 @@ def end_launch():
 
 def launchclient(arg):
     exitcode = os.system("start \"Lunar Client CN\" " + arg)
-    if not exitcode:
-        QMessageBox.information(None, "Lunar Client CN", "游戏非正常退出\n退出码: {}\n请勿截图此界面给其他人!!!".format(exitcode))
+    sys.exit()
+
+term = """Emmmmmmmmmm
+一些想说的话 (只会弹出一次)
+LunarClient-CN从来没有增加过后门, 而且是开源在GitHub上面的
+网址: https://github.com/chenmy1903/LunarClient-CN
+且唯一作者为chenmy1903 (CubeWhy), 只发布在GitHub上面, 其他地方下载到的都不是正版!
+----
+关于封禁
+LC-CN没有任何外置的反作弊检测!可以开挂!不会封禁开挂的玩家!
+> 正常玩家还是不要看具体的关于封禁罢......
+------
+点击Yes启动游戏, 且此提示不在弹出
+"""
+
+def pop_tip_of_first_launch():
+    return QMessageBox.question(None, "Lunar Client-CN", term) == QMessageBox.Yes
+
+
+cnclient = os.path.join(os.path.expanduser("~"), ".lunarclient", "cnclient")
 
 def main():
     print("启动Lunar Client!")
+    if not os.path.isdir(cnclient):
+        os.makedirs(cnclient)
+    At = os.path.join(cnclient, "AcceptedTerm")
+    app = QApplication([sys.executable])
+    first_launch = not os.path.isfile(At)
+    if first_launch:
+        if not pop_tip_of_first_launch():
+            return
+        with open(At, "w") as f:
+            f.write("True")
     java = os.path.join(os.path.dirname(BASE_DIR), "java-runtime", "bin", "javaw.exe" if run_in_pyw else "java.exe")
     java_agents = get_java_agents()
     launch_arg = "\"" + java + "\" " + " ".join(java_agents) + " " + " ".join(sys.argv[1:])
-    app = QApplication([sys.executable])
+    with open(os.path.join(cnclient, "lastlaunch.bat"), "w") as f:
+        f.write("@echo off" + "\n" + launch_arg)
     print("启动参数: {}".format(launch_arg))
     launch = threading.Thread()
     launch.run = lambda: launchclient(launch_arg)
