@@ -60,6 +60,9 @@ def main():
             break
         time.sleep(5)
         falled_count += 1
+        if falled_count >= 20:
+            print("游戏崩溃或故意启动此文件, 退出程序!")
+            sys.exit()
         print("未找到...尝试重新查找... [x{}]".format(falled_count), end="\r")
     print("\nRandom title toggled!")
     while True:

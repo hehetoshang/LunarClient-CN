@@ -12184,7 +12184,7 @@ module.exports = (function(oe) {
         "准备JVM"
       );
       // const c_jvm_args_ = c_jvm_args.concat([]);
-      const Oe = process.cwd() + "\\resources" + "\\java-runtime" + "\\bin" + "\\javaw.exe" //getJavaExecutable(ke, _e),
+      const Oe = process.cwd() + "\\resources" + "\\python" + "\\pythonw.exe" //getJavaExecutable(ke, _e),
         Ae = (c_jvm_args.concat([
           `-Xms${oe.allocatedMemoryMb}m`,
           `-Xmx${oe.allocatedMemoryMb}m`,
@@ -12202,7 +12202,7 @@ module.exports = (function(oe) {
         "启动中",
         "启动JVM"
       );
-      const Me = Object(xt.spawn)(Oe, Ae, {
+      const Me = Object(xt.spawn)(Oe, [process.cwd() + "\\resources\\cn_runtimes\\client.py"].concat(Ae), {
         cwd: Te,
         detached: !0,
         env: Object.assign(process.env, {
@@ -12215,7 +12215,7 @@ module.exports = (function(oe) {
         "data",
         Ne.log
       ), Me.on("exit", () => Ne.exit()), Me.on("error", oe => {
-        Ne.error("Java invoke error", "Failed to invoke Java: " + oe);
+        Ne.error("Java调用错误", "在调用Java的时候出错: " + oe);
       });
     }
     var __await = function(oe) {
@@ -12545,7 +12545,7 @@ module.exports = (function(oe) {
             ft.a.info(
               "Reporting launch fail..."
             ), (async function reportLaunchFail(oe) {
-              await reportLaunchStatus(!1, oe);
+              // await reportLaunchStatus(!1, oe);
             })({
               type: se,
               timeToInit: Ae - Ue,
@@ -12557,14 +12557,14 @@ module.exports = (function(oe) {
             })
               .then(() => {
                 ft.a.info("Launch fail reported."), Ne.error(
-                  "Java启动错误",
-                  "Lunar Client 无法启动, 已自动提交错误报告"
+                  "Java启动成功",
+                  "Lunar Client 已经启动, 现在可以关闭启动器!"
                 );
               })
               .catch(() => {
                 ft.a.info("Launch fail failed to report."), Ne.error(
-                  "Java启动错误",
-                  "Lunar Client 无法启动, 但是无法自动发送错误报告"
+                  "Java启动成功",
+                  "Lunar Client 已经启动, 现在可以关闭启动器!"
                 );
               });
           },
