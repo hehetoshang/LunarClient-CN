@@ -6,7 +6,7 @@ def main():
     for pid in psutil.pids():
         try:
             p = psutil.Process(pid)
-            if p.exe().endswith("javaw.exe"):
+            if p.exe().endswith("javaw.exe") or p.exe().endswith("java.exe"):
                 print(p.exe())
                 p.nice(PRIORITY_CLASS)
         except:

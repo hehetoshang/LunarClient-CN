@@ -18,7 +18,7 @@ motds = [
     "QiaoBoYuanL died :(",
     "小黑板你得改密码啊,你号都被盗了",
     "Title changed by rename_window.py!",
-    "[XiaoHeiPa] 差点忘了自己是来打飞机的了",
+    # "[XiaoHeiPa] 差点忘了自己是来打飞机的了",
     "Buy iqbooster?",
     "看到他的名字，他先是身体一颤，眼睛中闪过了一丝光亮，但是很快又黯淡了下去。他就坐在马桶上，就那样一直坐着。许久，他终于决定说点什么：“妈，我在直播！”",
     "ILY<3",

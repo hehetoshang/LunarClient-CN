@@ -1,6 +1,7 @@
 import os
 import sys
 import threading
+import configparser
 
 from PyQt5.QtWidgets import QApplication, QMessageBox
 
@@ -15,7 +16,19 @@ def get_java_agents():
         return []
     for f in os.listdir(jagents_dir):
         if f.endswith(".jar"):
-            agents_path.append("-javaagent:" + os.path.join(jagents_dir, f))
+            cfg = configparser.ConfigParser()
+            cfg_file = os.path.join(jagents_dir, f + ".ini")
+            cfg.read(cfg_file)
+            cfg.add_section("cnclient") if not cfg.has_section("cnclient") else ""
+            cfg.set("cnclient", "args", ) if not cfg.has_option("cnclient", "args") else ""
+            with open(cfg_file, "w") as fr:
+                cfg.write(fr)
+            try:
+                arg = cfg["cnclient"]["args"]
+            except configparser.NoSectionError: 
+                QMessageBox.critical(None, "LC-CnLauncher", "加载Java助理配置时出现错误\n文件: {}\n删除此文件可能会解决问题。\n点击确定跳过加载此Jar".format(cfg_file))
+                continue
+            agents_path.append("-javaagent:\"" + os.path.join(jagents_dir, f) + "\"" + (("=" + arg) if arg != "" else ""))
     return agents_path
 
 def end_launch():
