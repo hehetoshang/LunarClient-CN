@@ -24,7 +24,10 @@ motds = [
     "ILY<3",
     "github.com/XiaoHeiPa - XiaoHeiPa Official GitHub!",
     "Sub to 兰方翔Official on bilibili!",
-] + (["Pls a rank because today is 11/7!"] if (time_now.tm_mday == 7 and time_now.tm_mon == 11) else [])
+] + (["Pls a rank because today is 11/7!", "Pls duel XiaoHeiPa for a free rank!", "Happy birthday XiaoHeiPa <3"] if (time_now.tm_mday == 7 and time_now.tm_mon == 11) else []) + \
+    (["Happy birthday CubeWhy <3", "do /gift CubeWhy plz LOL", "Sub to CubeWhy on Bilibili today bcz it's he's birthday?"] if (time_now.tm_mday == 21 and time_now.tm_mon == 12) else []) + \
+        (["I love cym forever <3"] if (time_now.tm_mday == 7 and time_now.tm_mon == 2) else []) + \
+            (["Happy new year"] if (time_now.tm_mday == 1 and time_now.tm_mon == 1) else [])
 
 old_title = ""
 inited = False

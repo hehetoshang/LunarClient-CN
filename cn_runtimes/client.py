@@ -1,9 +1,33 @@
 import os
 import sys
 import threading
+import requests
+import webbrowser
 import configparser
 
 from PyQt5.QtWidgets import QApplication, QMessageBox
+
+__version__ = "v2.11.2-fix13"
+
+PRE_VERSION = False
+
+# ----
+SKIP_CRACK_UPDATE = False
+SKIP_CRACK_UPDATE = PRE_VERSION
+# ----
+
+LATEST_VERSION_URL = "https://github.com/chenmy1903/LunarClient-CN/releases"
+LATEST_VERSION = __version__
+
+if not SKIP_CRACK_UPDATE:
+    try:
+        fast_link = "https://gh.api.99988866.xyz/"
+        update_link = "chenmy1903/lunarclient-cn/releases/latest"
+
+        LATEST_VERSION_URL = "https://github.com/" + "/".join(requests.get(fast_link + update_link, timeout=5).url.split("/")[3:])
+        LATEST_VERSION = LATEST_VERSION_URL.split("/")[-1]
+    except Exception as e:
+        SKIP_CRACK_UPDATE = True
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -50,7 +74,12 @@ LunarClient-CN从来没有增加过后门, 而且是开源在GitHub上面的
 LC-CN没有任何外置的反作弊检测!可以开挂!不会封禁开挂的玩家!
 > 正常玩家还是不要看具体的关于封禁罢......
 ------
-点击Yes启动游戏, 且此提示不在弹出
+关于Low IQ
+LC-CN从fix12之后启动器核心就换为CNLAUNCHER了, 大大的java启动成功应该看得见罢
+如果无法启动就是启动的时候发生了错误
+CNLAUNCHER还没有制作错误处理, 请等待更新.
+------
+点击Yes启动游戏, 且此提示在下次更新之前不再弹出。
 """
 
 def pop_tip_of_first_launch():
@@ -66,11 +95,19 @@ def main():
     At = os.path.join(cnclient, "AcceptedTerm")
     app = QApplication([sys.executable])
     first_launch = not os.path.isfile(At)
+    if LATEST_VERSION != __version__ and not SKIP_CRACK_UPDATE:
+        if QMessageBox.question(None, "Lunar Client CN AutoUpdate", "你的LC-CN需要更新!\n当前版本: {}\n最新版本: {}\n点击确定跳转到下载页面(点击取消退出LC-CN)\n{}".format(__version__, LATEST_VERSION, LATEST_VERSION_URL)) == QMessageBox.Yes:
+            webbrowser.open(LATEST_VERSION_URL)    
+        sys.exit()
+    if not first_launch:
+        with open(At, "r") as f:
+            if __version__ not in f.read():
+                first_launch = True
     if first_launch:
         if not pop_tip_of_first_launch():
             return
         with open(At, "w") as f:
-            f.write("True")
+            f.write(__version__)
     java = os.path.join(os.path.dirname(BASE_DIR), "java-runtime", "bin", "javaw.exe" if run_in_pyw else "java.exe")
     java_agents = get_java_agents()
     launch_arg = "\"" + java + "\" " + " ".join(java_agents) + " " + " ".join(sys.argv[1:])
