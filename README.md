@@ -48,7 +48,6 @@
 4. 封禁LolQiQi_因为跑路/开外挂boosting CubeWhy(幸好用小号玩的,要不我大号没了L)
 5. 封禁Alyars因为MoreThanLucky are banned
 6. 封禁cmy_love_lan因为实名/跑路/辱骂他人/开安全黑客
-7. 封禁xiaojin0318因为NM$L玩bw打到一半逃逸
 
 ## 封禁更新
 

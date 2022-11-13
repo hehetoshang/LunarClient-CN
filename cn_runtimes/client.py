@@ -21,7 +21,7 @@ LATEST_VERSION = __version__
 
 if not SKIP_CRACK_UPDATE:
     try:
-        fast_link = "https://gh.api.99988866.xyz/"
+        fast_link = "https://github.com/"
         update_link = "chenmy1903/lunarclient-cn/releases/latest"
 
         LATEST_VERSION_URL = "https://github.com/" + "/".join(requests.get(fast_link + update_link, timeout=5).url.split("/")[3:])
@@ -44,7 +44,7 @@ def get_java_agents():
             cfg_file = os.path.join(jagents_dir, f + ".ini")
             cfg.read(cfg_file)
             cfg.add_section("cnclient") if not cfg.has_section("cnclient") else ""
-            cfg.set("cnclient", "args", ) if not cfg.has_option("cnclient", "args") else ""
+            cfg.set("cnclient", "args", "") if not cfg.has_option("cnclient", "args") else ""
             with open(cfg_file, "w") as fr:
                 cfg.write(fr)
             try:
