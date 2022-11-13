@@ -7,7 +7,7 @@ import configparser
 
 from PyQt5.QtWidgets import QApplication, QMessageBox
 
-__version__ = "v2.11.2-fix13"
+__version__ = "v2.11.2-fix14"
 
 PRE_VERSION = False
 
