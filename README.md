@@ -47,7 +47,7 @@
 3. 封禁LianBeans因为MoreThanLucky are banned
 4. 封禁LolQiQi_因为跑路/开外挂boosting CubeWhy(幸好用小号玩的,要不我大号没了L)
 5. 封禁Alyars因为MoreThanLucky are banned
-6. 封禁cmy_love_lan因为实名/跑路/辱骂他人/开安全黑客
+6. 封禁_Your_Lover_因为实名/跑路/辱骂他人/开安全黑客
 
 ## 封禁更新
 
@@ -59,12 +59,19 @@
 > 全饰品版本不会受到支持
 
 
+
+## v2.11.2-fix15
+
+> LowIQ help -> [Here](https://help.lunarcn.tk)
+
+1. 增加Jagents增加提示
+2. 增加汉化
+3. 增加Wiki
+4. 修改左下角为CubeWhy
+
 ## v2.11.2-fix14
 
-> 最后一个版本, 接下来的更新在[LC-CN+](https://github.com/chenmy1903/LunarClient-CN-Plus)
-
 1. 修复bugs
-
 
 ## v2.11.2-fix13
 
