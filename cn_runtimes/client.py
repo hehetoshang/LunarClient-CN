@@ -7,7 +7,7 @@ import configparser
 
 from PyQt5.QtWidgets import QApplication, QMessageBox
 
-__version__ = "v2.11.2-fix14"
+__version__ = "v2.11.2-fix15"
 
 PRE_VERSION = False
 
@@ -38,10 +38,14 @@ def get_java_agents():
     agents_path = []
     if not os.path.isdir(jagents_dir):
         return []
+    init_agent = False
     for f in os.listdir(jagents_dir):
         if f.endswith(".jar"):
             cfg = configparser.ConfigParser()
-            cfg_file = os.path.join(jagents_dir, f + ".ini")
+            agent_config = os.path.join(jagents_dir, f + ".ini")
+            if not os.path.isfile(agent_config):
+                init_agent = True
+            cfg_file = os.path.join(agent_config)
             cfg.read(cfg_file)
             cfg.add_section("cnclient") if not cfg.has_section("cnclient") else ""
             cfg.set("cnclient", "args", "") if not cfg.has_option("cnclient", "args") else ""
@@ -52,7 +56,9 @@ def get_java_agents():
             except configparser.NoSectionError: 
                 QMessageBox.critical(None, "LC-CnLauncher", "加载Java助理配置时出现错误\n文件: {}\n删除此文件可能会解决问题。\n点击确定跳过加载此Jar".format(cfg_file))
                 continue
-            agents_path.append("-javaagent:\"" + os.path.join(jagents_dir, f) + "\"" + (("=" + arg) if arg != "" else ""))
+            agents_path.append("-javaagent:\"" + os.path.join(jagents_dir, f) + "\"" + (("=\"" + arg + "\"") if arg != "" else ""))
+    if init_agent:
+        QMessageBox.information(None, "Lunar Client CN", "新的JavaAgents配置文件已经添加!\n请调整参数然后点击确认来启动游戏!")
     return agents_path
 
 def end_launch():
@@ -112,7 +118,7 @@ def main():
     java_agents = get_java_agents()
     launch_arg = "\"" + java + "\" " + " ".join(java_agents) + " " + " ".join(sys.argv[1:])
     with open(os.path.join(cnclient, "lastlaunch.bat"), "w") as f:
-        f.write("@echo off" + "\n" + launch_arg)
+        f.write("@echo off" + "\n" + f"cd /d {os.path.abspath('.')}" + "\n" + " ".join([os.path.join(os.path.dirname(BASE_DIR), "java-runtime", "bin", "java.exe")] + launch_arg.split(" ")[1:]) + "\npause")
     print("启动参数: {}".format(launch_arg))
     launch = threading.Thread()
     launch.run = lambda: launchclient(launch_arg)

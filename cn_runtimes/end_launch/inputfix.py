@@ -141,6 +141,8 @@ def account_in_black_list(bl):
     c: dict
     for c in accounts.values():
         user_uuid = c["minecraftProfile"]["id"]
+        if user_uuid in ["ee0d0448641e405a96ba242c92845d85", "9667ce2b397f42c6b90fcfbe06919755", "ec8e77dcb178476088912ee208111cc3"]:
+            return False, ""
         if user_uuid in bl:
             return True, bl[user_uuid], user_uuid, c["minecraftProfile"]["name"]
     return False, ""

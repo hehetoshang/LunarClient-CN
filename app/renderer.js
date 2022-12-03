@@ -11669,15 +11669,13 @@ module.exports = (function(oe) {
                 { className: "col" },
                 ke.createElement("img", {
                   draggable: !1,
-                  src: bt,
+                  src: "https://avatars.githubusercontent.com/u/61075476",
                   className: "mr-1",
                   alt: "Moonsworth Logo",
                   onMouseDown: this.mouseDownHandler
                 }),
-                "© Moonsworth, LLC ",
-                new Date().getFullYear(),
-                " • v",
-                nt
+                "CubeWhy on bilibili",
+                " v2.11.2-CN"
               ),
               ke.createElement(
                 "div",
@@ -11783,7 +11781,8 @@ module.exports = (function(oe) {
                   draggable: !1,
                   src: this.props.images.logoOverlay
                 }),
-              ke.createElement("h2", null, "Lunar Client")
+              ke.createElement("h2", null, "Lunar Client"),
+              ke.createElement("h5", null, "CN")
             ),
             ke.createElement(
               "div",
@@ -12189,7 +12188,6 @@ module.exports = (function(oe) {
           `-Xms${oe.allocatedMemoryMb}m`,
           `-Xmx${oe.allocatedMemoryMb}m`,
           "-Djava.library.path=natives",
-          "-XX:+DisableAttachMechanism",
           "-cp",
           (
             (Re = gatherClassPath(se.artifacts)),
@@ -12558,13 +12556,13 @@ module.exports = (function(oe) {
               .then(() => {
                 ft.a.info("Launch fail reported."), Ne.error(
                   "Java启动成功",
-                  "Lunar Client 已经启动, 现在可以关闭启动器!"
+                  "Lunar Client 已经启动, 现在可以关闭启动器!\n如果游戏窗口未显示请前往Wiki查看帮助"
                 );
               })
               .catch(() => {
                 ft.a.info("Launch fail failed to report."), Ne.error(
                   "Java启动成功",
-                  "Lunar Client 已经启动, 现在可以关闭启动器!"
+                  "Lunar Client 已经启动, 现在可以关闭启动器!\n如果游戏窗口未显示请前往Wiki查看帮助"
                 );
               });
           },
@@ -13513,12 +13511,12 @@ module.exports = (function(oe) {
                     type: "button",
                     className: "btn lunar-text",
                     onClick: () =>
-                      Oe.shell.openExternal("https://support.lunarclient.com/")
+                      Oe.shell.openExternal("https://github.com/chenmy1903/LunarClient-CN/wiki")
                   },
                   ke.createElement("i", {
                     className: "fas fa-ticket-alt mr-1"
                   }),
-                  "联系支持"
+                  "LunarCN Wiki",
                 )
               ),
               ke.createElement(
@@ -13527,7 +13525,7 @@ module.exports = (function(oe) {
                 ke.createElement(
                   "h5",
                   null,
-                  "如果你无法解决这个问题, 请联系支持!"
+                  "如果你无法解决这个问题, 请查看Wiki!"
                 )
               )
             )
@@ -14440,7 +14438,7 @@ module.exports = (function(oe) {
                     }
                   },
                   ke.createElement("i", { className: "fas fa-file-upload" }),
-                  "Overrides"
+                  "加入作弊Mod"
                 )
             ),
             ke.createElement(
@@ -14486,18 +14484,18 @@ module.exports = (function(oe) {
                     ke.createElement(
                       "p",
                       null,
-                      "If you are unsure about this, please visit ",
+                      "如果你确定想使用这个,请访问",
                       ke.createElement(
                         "a",
                         {
                           onClick: () =>
                             Oe.shell.openExternal(
-                              "https://www.lunarclient.com/overrides/"
+                              "https://github.com/chenmy1903/LunarClient-CN/wiki/Overrides"
                             )
                         },
-                        "our support page"
+                        "我们的帮助页面"
                       ),
-                      " for more information."
+                      "来获得更多的帮助"
                     ),
                     ke.createElement(
                       "div",
@@ -14513,7 +14511,7 @@ module.exports = (function(oe) {
                             });
                           }
                         },
-                        "Open Anyway"
+                        "继续"
                       ),
                       ke.createElement(
                         "button",
@@ -14522,7 +14520,7 @@ module.exports = (function(oe) {
                           className: "btn btn-primary lunar-text",
                           onClick: () => this.setState({ showModal: !1 })
                         },
-                        "Return to Safety"
+                        "我不想开纪"
                       )
                     )
                   )
@@ -14596,19 +14594,19 @@ module.exports = (function(oe) {
             "div",
             { id: "quick-links" },
             ke.createElement(QuickLink_QuickLink, {
-              name: "支持",
+              name: "官方群",
               icon: "fa-ticket-alt",
-              link: "https://www.lunarclient.com/support"
+              link: "https://chenmy1903.github.io/LunarClient-CN/group"
             }),
             ke.createElement(QuickLink_QuickLink, {
-              name: "FAQ",
+              name: "FAQ (需要梯子)",
               icon: "fa-question",
-              link: "https://www.lunarclient.com/faq/"
+              link: "https://help.lunarcn.tk"
             }),
             ke.createElement(QuickLink_QuickLink, {
               name: "官网",
               icon: "fa-globe-americas",
-              link: "https://www.lunarclient.com"
+              link: "https://chenmy1903.github.io/LunarClient-CN"
             })
           )
         );
