@@ -5,9 +5,11 @@ import requests
 import webbrowser
 import configparser
 
+import zipfile
+
 from PyQt5.QtWidgets import QApplication, QMessageBox
 
-__version__ = "v2.11.2-fix15"
+__version__ = "v2.11.2-fix16"
 
 PRE_VERSION = False
 
@@ -30,6 +32,7 @@ if not SKIP_CRACK_UPDATE:
         SKIP_CRACK_UPDATE = True
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+CLIENT_DIR = os.path.dirname(BASE_DIR)
 
 run_in_pyw = sys.executable.replace("\\", "/").split("/")[-1] in ["pyw.exe", "pythonw.exe"]
 
@@ -59,6 +62,7 @@ def get_java_agents():
             agents_path.append("-javaagent:\"" + os.path.join(jagents_dir, f) + "\"" + (("=\"" + arg + "\"") if arg != "" else ""))
     if init_agent:
         QMessageBox.information(None, "Lunar Client CN", "新的JavaAgents配置文件已经添加!\n请调整参数然后点击确认来启动游戏!")
+        return get_java_agents()
     return agents_path
 
 def end_launch():
@@ -94,6 +98,44 @@ def pop_tip_of_first_launch():
 
 cnclient = os.path.join(os.path.expanduser("~"), ".lunarclient", "cnclient")
 
+
+def update_lunarcn():
+    source_code = "https://github.com/chenmy1903/LunarClient-CN/archive/refs/tags/" + LATEST_VERSION + ".zip"
+    white_list = ["java-runtime", "javaagents", "python"]
+    launcher = os.path.join(CLIENT_DIR, "Lunar Client CN.exe")
+    anti_lowiq = launcher + ".LunarCN正在更新不要启动启动器不要关电脑请等待更新完成.LowIQ"
+    upd_temp = os.path.join(os.path.expanduser("~"), "cnclient", "auto-update")
+    if not os.path.isdir(upd_temp):
+        os.makedirs(upd_temp)
+    update_file = os.path.join(upd_temp, LATEST_VERSION + ".zip")
+    try:
+        r = requests.get(source_code, headers={"User-Agent": "Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)"})
+        with open(update_file, "wb") as f:
+            f.write(r.raw)
+        if os.path.isfile(launcher):
+            os.rename(launcher, anti_lowiq) # Anti LowIQ
+        for upd in os.listdir(CLIENT_DIR):
+            if upd not in white_list: # Remove source from LunarCN
+                need_upd = os.path.join(CLIENT_DIR, upd)
+                if os.path.isdir(need_upd):
+                    os.removedirs(need_upd)
+                elif os.path.isfile(need_upd):
+                    os.remove(need_upd)
+        z = zipfile.ZipFile(update_file)
+        z.extractall(upd_temp)
+        new_files = os.path.join(upd_temp, LATEST_VERSION)
+        for upd_file in os.listdir(new_files):
+            os.rename(os.path.join(new_files, upd_file), os.path.join(CLIENT_DIR, upd_file))
+    except Exception as e:
+        print(e)
+        QMessageBox.critical(None, "Lunar Client CN AutoUpdate", "自动更新失败,请使用Steam++或其他加速器软件或手动更新!")
+    else:
+        QMessageBox.information(None, "Lunar Client CN AutoUpdate", "LunarCN更新完成")
+    finally:
+        if os.path.isfile(anti_lowiq):
+            os.rename(anti_lowiq, launcher) # Update done
+
+
 def main():
     print("启动Lunar Client!")
     if not os.path.isdir(cnclient):
@@ -102,8 +144,9 @@ def main():
     app = QApplication([sys.executable])
     first_launch = not os.path.isfile(At)
     if LATEST_VERSION != __version__ and not SKIP_CRACK_UPDATE:
-        if QMessageBox.question(None, "Lunar Client CN AutoUpdate", "你的LC-CN需要更新!\n当前版本: {}\n最新版本: {}\n点击确定跳转到下载页面(点击取消退出LC-CN)\n{}".format(__version__, LATEST_VERSION, LATEST_VERSION_URL)) == QMessageBox.Yes:
-            webbrowser.open(LATEST_VERSION_URL)    
+        if QMessageBox.question(None, "Lunar Client CN AutoUpdate", "你的LC-CN需要更新!\n当前版本: {}\n最新版本: {}\n点击确定则自动更新(点击取消退出LC-CN)\n{}".format(__version__, LATEST_VERSION, LATEST_VERSION_URL)) == QMessageBox.Yes:
+            # webbrowser.open(LATEST_VERSION_URL)
+            update_lunarcn()
         sys.exit()
     if not first_launch:
         with open(At, "r") as f:
