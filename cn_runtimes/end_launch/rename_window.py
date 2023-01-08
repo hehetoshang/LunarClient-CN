@@ -1,4 +1,4 @@
-# 修改游戏标题至Lunar Client CN (版本号)
+# 修改游戏标题至Lunar Client CN (版本号) | Motd
 # import os
 import random
 import sys
@@ -15,7 +15,8 @@ motds = [
     "LC-CN只在GitHub上面发布",
     "qby love hyc<3",
     "诶哟~嘿~",
-    "QiaoBoYuanL died :(",
+    "sub to 咸鱼SaltyFish in bilibili",
+    # "QiaoBoYuanL died :(",
     "小黑板你得改密码啊,你号都被盗了",
     "Title changed by rename_window.py!",
     # "[XiaoHeiPa] 差点忘了自己是来打飞机的了",

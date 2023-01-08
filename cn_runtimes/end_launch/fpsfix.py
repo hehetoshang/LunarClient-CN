@@ -1,6 +1,6 @@
 import psutil
 
-PRIORITY_CLASS = psutil.NORMAL_PRIORITY_CLASS # 优先级
+PRIORITY_CLASS = psutil.HIGH_PRIORITY_CLASS # 优先级
 
 def main():
     for pid in psutil.pids():

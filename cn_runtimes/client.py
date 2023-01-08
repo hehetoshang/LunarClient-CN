@@ -1,15 +1,17 @@
+import json
 import os
 import sys
 import threading
-import requests
 import webbrowser
+import requests
+import psutil
 import configparser
 
 import zipfile
 
 from PyQt5.QtWidgets import QApplication, QMessageBox
 
-__version__ = "v2.11.2-fix16"
+__version__ = "v2.11.2-fix17"
 
 PRE_VERSION = False
 
@@ -17,6 +19,8 @@ PRE_VERSION = False
 SKIP_CRACK_UPDATE = False
 SKIP_CRACK_UPDATE = PRE_VERSION
 # ----
+
+# time.sleep(114514) # Anti 张子曦L
 
 LATEST_VERSION_URL = "https://github.com/chenmy1903/LunarClient-CN/releases"
 LATEST_VERSION = __version__
@@ -35,6 +39,29 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 CLIENT_DIR = os.path.dirname(BASE_DIR)
 
 run_in_pyw = sys.executable.replace("\\", "/").split("/")[-1] in ["pyw.exe", "pythonw.exe"]
+
+def get_banned():
+    blacklist = []
+    try:
+        r = requests.get("https://chenmy1903.github.io/LunarClient-CN/blacklist.json", proxies={'http': None, 'https': None}) # 防止被抓包软件重定向
+        blacklist = json.loads(r.text)
+    except:
+        print("封禁列表获取失败")
+    return blacklist
+
+def account_in_black_list(bl):
+    f = os.path.join(os.path.expanduser("~"), ".lunarclient", "settings", "game", "accounts.json")
+    with open(f, "r", encoding="utf-8") as f_r:
+        j = json.load(f_r)
+    accounts: dict = j["accounts"]
+    c: dict
+    for c in accounts.values():
+        user_uuid = c["minecraftProfile"]["id"]
+        if user_uuid in ["ee0d0448641e405a96ba242c92845d85", "9667ce2b397f42c6b90fcfbe06919755", "ec8e77dcb178476088912ee208111cc3"]:
+            return False, ""
+        if user_uuid in bl:
+            return True, bl[user_uuid], user_uuid, c["minecraftProfile"]["name"]
+    return False, ""
 
 def get_java_agents():
     jagents_dir = os.path.join(os.path.dirname(BASE_DIR), "javaagents")
@@ -72,23 +99,16 @@ def end_launch():
 
 def launchclient(arg):
     exitcode = os.system("start \"Lunar Client CN\" " + arg)
-    sys.exit()
+    sys.exit(exitcode)
 
-term = """Emmmmmmmmmm
-一些想说的话 (只会弹出一次)
-LunarClient-CN从来没有增加过后门, 而且是开源在GitHub上面的
-网址: https://github.com/chenmy1903/LunarClient-CN
-且唯一作者为chenmy1903 (CubeWhy), 只发布在GitHub上面, 其他地方下载到的都不是正版!
+term = """主播你好, 请你看完这个再去问LowIQ问题
+1. 如果游戏长时间不启动, 请检查后台是否有进程
+2. 请将LunarClient CN文件夹放到没空格/中文的路径, 并使用bat启动
 ----
-关于封禁
-LC-CN没有任何外置的反作弊检测!可以开挂!不会封禁开挂的玩家!
-> 正常玩家还是不要看具体的关于封禁罢......
-------
-关于Low IQ
-LC-CN从fix12之后启动器核心就换为CNLAUNCHER了, 大大的java启动成功应该看得见罢
-如果无法启动就是启动的时候发生了错误
-CNLAUNCHER还没有制作错误处理, 请等待更新.
-------
+此版本更新内容
+1. 去除了inputfix
+2. 更新了封禁
+----
 点击Yes启动游戏, 且此提示在下次更新之前不再弹出。
 """
 
@@ -135,18 +155,37 @@ def update_lunarcn():
         if os.path.isfile(anti_lowiq):
             os.rename(anti_lowiq, launcher) # Update done
 
+ban_end = """主播我建议你想想自己为啥被ban
+"""
+reason = "No reason"
 
 def main():
     print("启动Lunar Client!")
+    blacklist = get_banned()
+    banned = account_in_black_list(blacklist)
+    app = QApplication([sys.executable])
+    if banned[0]:
+        for pid in psutil.pids():
+            try:
+                p = psutil.Process(pid)
+                if p.exe().endswith("javaw.exe") or p.exe().endswith("java.exe") or p.exe().endswith("Lunar Client CN.exe") or p.exe().endswith("Lunar Client.exe"):
+                    p.kill()
+            except:
+                pass
+        reason = banned[1]["reason"] if "reason" in banned[1] else reason
+        ban_end = banned[1]["ban_end"] if "ban_end" in banned[1] else ban_end
+        u_id = banned[2]
+        u_nick = banned[3]
+        QMessageBox.critical(None, "LunarClient-CN ban", "你的lc-cn账户已被封禁~\n申诉/购买unban加QQ -> 2834886052 <-\nPlayer: {}\nUUID: {}\n原因: {}\n{}\n{}\n{}".format(u_nick, u_id, reason, len(ban_end) * "-", ban_end, len(ban_end) * "-"))
+        sys.exit()
     if not os.path.isdir(cnclient):
         os.makedirs(cnclient)
     At = os.path.join(cnclient, "AcceptedTerm")
-    app = QApplication([sys.executable])
     first_launch = not os.path.isfile(At)
     if LATEST_VERSION != __version__ and not SKIP_CRACK_UPDATE:
-        if QMessageBox.question(None, "Lunar Client CN AutoUpdate", "你的LC-CN需要更新!\n当前版本: {}\n最新版本: {}\n点击确定则自动更新(点击取消退出LC-CN)\n{}".format(__version__, LATEST_VERSION, LATEST_VERSION_URL)) == QMessageBox.Yes:
-            # webbrowser.open(LATEST_VERSION_URL)
-            update_lunarcn()
+        if QMessageBox.question(None, "Lunar Client CN AutoUpdate", "你的LC-CN需要更新!\n当前版本: {}\n最新版本: {}\n点击确定则更新(点击取消退出LC-CN)\n{}".format(__version__, LATEST_VERSION, LATEST_VERSION_URL)) == QMessageBox.Yes:
+            webbrowser.open(LATEST_VERSION_URL)
+            # update_lunarcn()
         sys.exit()
     if not first_launch:
         with open(At, "r") as f:
