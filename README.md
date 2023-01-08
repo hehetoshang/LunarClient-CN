@@ -64,7 +64,8 @@
 2. fpsfix滚回早期版本
 3. 移除中文修复
 4. 修复封禁
-5. 增加time.sleep(114514) (AntiZzx)
+5. 移除CubeWhys的ban bypass (被余鸿博盗走了)
+6. 增加time.sleep(114514) (AntiZzx)
 
 ## v2.11.2-fix16
 
