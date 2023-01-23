@@ -71,7 +71,7 @@ def main():
     print("\nRandom title toggled!")
     while True:
         set_title()
-        time.sleep(10)
+        time.sleep(10) # ZzxMC: 真的离谱, time.sleep直接把自己的程序暂停了10s
 
 if __name__ == "__main__":
     main()

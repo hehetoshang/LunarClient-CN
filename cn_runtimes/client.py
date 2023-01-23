@@ -11,7 +11,7 @@ import zipfile
 
 from PyQt5.QtWidgets import QApplication, QMessageBox
 
-__version__ = "v2.11.2-fix17"
+__version__ = "v2.11.2-fix18"
 
 PRE_VERSION = False
 
@@ -39,6 +39,23 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 CLIENT_DIR = os.path.dirname(BASE_DIR)
 
 run_in_pyw = sys.executable.replace("\\", "/").split("/")[-1] in ["pyw.exe", "pythonw.exe"]
+
+def show_cmd_alert(msg: str):
+    r_msg = msg.replace("\n", "\\n") + "\n如果你无法解决此问题, 请去找zzxMinecraft (张子曦MC) !"
+    os.system(f"start \"LunarClient-CN\" \"{os.path.join(sys.exec_prefix, 'python.exe')}\" -c \"print('{r_msg}'.replace('\\\\n', '\\n'));input('按Enter退出此窗口')\"")
+
+def anti_lowiq() -> bool:
+    cwd = os.getcwd()
+    if " " in cwd:
+        show_cmd_alert("目录中不能包含空格!请将LunarClient CN的文件夹移动到桌面上!")
+        return False
+    # for path in os.environ["path"]:
+    #     if os.path.isfile(os.path.join(path, "qwindows.dll")):
+    #         break
+    # else:
+    #     show_cmd_alert("请使用launchlc.bat启动LunarClient CN或手动下载qt-runtime\nqt-runtime download: https://chenmy1903.lanzoum.com/iXPPM0lodtzi\n将4个dll解压到C:/Windows文件夹里边即可")
+    #     return False
+    return True
 
 def get_banned():
     blacklist = []
@@ -161,6 +178,8 @@ reason = "No reason"
 
 def main():
     print("启动Lunar Client!")
+    if not anti_lowiq():
+        return # 张子曦LowIQ检测
     blacklist = get_banned()
     banned = account_in_black_list(blacklist)
     app = QApplication([sys.executable])
