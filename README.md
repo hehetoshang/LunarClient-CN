@@ -42,12 +42,11 @@
 
 ## 乐子封禁
 
-1. 封禁LuckyInLove_因为跑路/实名/MoreThanLucky are banned
-2. 封禁Evecat114514
-3. 封禁LianBeans因为MoreThanLucky are banned
-4. 封禁LolQiQi_因为跑路/开外挂boosting CubeWhy(幸好用小号玩的,要不我大号没了L)
-5. 封禁Alyars因为MoreThanLucky are banned
-6. 封禁_Your_Lover_因为实名/跑路/辱骂他人/开安全黑客
+> More info -> [here](chenmy1903/LunarClient-CN/wiki)
+
+1. 封禁Miaow_qwq因为张子曦L
+2. 封禁Noob_dawn因为张子曦的小狗
+3. 封禁CubeWhys因为这个号被盗走了
 
 ## 封禁更新
 
