@@ -1,3 +1,4 @@
+# encoding: UTF-8
 import json
 import os
 import sys
@@ -11,7 +12,7 @@ import zipfile
 
 from PyQt5.QtWidgets import QApplication, QMessageBox
 
-__version__ = "v2.11.2-fix18"
+__version__ = "v2.11.2-fix19"
 
 PRE_VERSION = False
 
@@ -22,13 +23,13 @@ SKIP_CRACK_UPDATE = PRE_VERSION
 
 # time.sleep(114514) # Anti 张子曦L
 
-LATEST_VERSION_URL = "https://github.com/chenmy1903/LunarClient-CN/releases"
+LATEST_VERSION_URL = "https://github.com/CubeWhyMC/LunarClient-CN/releases"
 LATEST_VERSION = __version__
 
 if not SKIP_CRACK_UPDATE:
     try:
         fast_link = "https://github.com/"
-        update_link = "chenmy1903/lunarclient-cn/releases/latest"
+        update_link = "CubeWhyMC/lunarclient-cn/releases/latest"
 
         LATEST_VERSION_URL = "https://github.com/" + "/".join(requests.get(fast_link + update_link, timeout=5).url.split("/")[3:])
         LATEST_VERSION = LATEST_VERSION_URL.split("/")[-1]
@@ -121,11 +122,14 @@ def launchclient(arg):
 term = """主播你好, 请你看完这个再去问LowIQ问题
 1. 如果游戏长时间不启动, 请检查后台是否有进程
 2. 请将LunarClient CN文件夹放到没空格/中文的路径, 并使用bat启动
-----
+3. 帮助网址lunarcn.top/faq/index.html请先看这个再问问题
+4. 带空格的路径的应该启动不了, 我没测试, 你可以测试一下
+====
 此版本更新内容
-1. 去除了inputfix
-2. 更新了封禁
-----
+1. 去除封禁
+2. 修复存档目录的空格bug
+3. 修复中文目录问题(未测试)
+====
 点击Yes启动游戏, 且此提示在下次更新之前不再弹出。
 """
 
@@ -180,23 +184,24 @@ def main():
     print("启动Lunar Client!")
     if not anti_lowiq():
         return # 张子曦LowIQ检测
-    blacklist = get_banned()
-    banned = account_in_black_list(blacklist)
+    # blacklist = get_banned()
+    # fix19 移除封禁
+    # banned = account_in_black_list(blacklist)
     app = QApplication([sys.executable])
-    if banned[0]:
-        for pid in psutil.pids():
-            try:
-                p = psutil.Process(pid)
-                if p.exe().endswith("javaw.exe") or p.exe().endswith("java.exe") or p.exe().endswith("Lunar Client CN.exe") or p.exe().endswith("Lunar Client.exe"):
-                    p.kill()
-            except:
-                pass
-        reason = banned[1]["reason"] if "reason" in banned[1] else reason
-        ban_end = banned[1]["ban_end"] if "ban_end" in banned[1] else ban_end
-        u_id = banned[2]
-        u_nick = banned[3]
-        QMessageBox.critical(None, "LunarClient-CN ban", "你的lc-cn账户已被封禁~\n申诉/购买unban加QQ -> 2834886052 <-\nPlayer: {}\nUUID: {}\n原因: {}\n{}\n{}\n{}".format(u_nick, u_id, reason, len(ban_end) * "-", ban_end, len(ban_end) * "-"))
-        sys.exit()
+    # if banned[0]:
+    #     for pid in psutil.pids():
+    #         try:
+    #             p = psutil.Process(pid)
+    #             if p.exe().endswith("javaw.exe") or p.exe().endswith("java.exe") or p.exe().endswith("Lunar Client CN.exe") or p.exe().endswith("Lunar Client.exe"):
+    #                 p.kill()
+    #         except:
+    #             pass
+    #     reason = banned[1]["reason"] if "reason" in banned[1] else reason
+    #     ban_end = banned[1]["ban_end"] if "ban_end" in banned[1] else ban_end
+    #     u_id = banned[2]
+    #     u_nick = banned[3]
+    #     QMessageBox.critical(None, "LunarClient-CN ban", "你的lc-cn账户已被封禁~\n申诉/购买unban加QQ -> 2834886052 <-\nPlayer: {}\nUUID: {}\n原因: {}\n{}\n{}\n{}".format(u_nick, u_id, reason, len(ban_end) * "-", ban_end, len(ban_end) * "-"))
+    #     sys.exit()
     if not os.path.isdir(cnclient):
         os.makedirs(cnclient)
     At = os.path.join(cnclient, "AcceptedTerm")

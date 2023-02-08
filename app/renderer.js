@@ -1,7 +1,7 @@
 /*! For license information please see renderer.js.LICENSE.txt */
 // 请支持正版: https://lunarclient.com/
-// by chenmy1903 on github
-// https://github.com/chenmy1903/LunarClient-CN/
+// by CubeWhy(鸭皇) on github
+// https://github.com/CubeWhyMC/LunarClient-CN/
 // *WARNING: 请不要随意修改jvm参数*
 // 
 // SETTINGS START
@@ -11374,7 +11374,7 @@ module.exports = (function(oe) {
       ot = Object(je.join)(Object(Re.homedir)(), ".lunarclient", "settings"),
       at = Object(je.join)(Object(Re.homedir)(), ".lunarclient", "jre"),
       lt = Object(je.join)(Object(Re.homedir)(), ".lunarclient", "offline"),
-      st = Object(je.join)(Object(Re.homedir)(), ".lunarclient", "textures"),
+      textureDir = Object(je.join)(Object(Re.homedir)(), ".lunarclient", "textures"),
       ct = Object(je.join)(
         Object(Re.homedir)(),
         ".lunarclient",
@@ -12319,7 +12319,7 @@ module.exports = (function(oe) {
       try {
         await Fe.promises.mkdir(ct, {
           recursive: !0
-        }), await Fe.promises.mkdir(st, { recursive: !0 });
+        }), await Fe.promises.mkdir(textureDir, { recursive: !0 });
       } catch (oe) {
         throw {
           short: "Create failed",
@@ -12374,7 +12374,7 @@ module.exports = (function(oe) {
       const ke = [];
       for (const _e of oe.split("\n")) {
         const [oe, Te] = _e.split(" "),
-          Ne = Object(je.join)(st, oe);
+          Ne = Object(je.join)(textureDir, oe);
         ke.push({
           file: { url: se + Te, differential: null, saveTo: Ne },
           ifSha1IsNot: Te
@@ -12388,7 +12388,7 @@ module.exports = (function(oe) {
       const ke = new Set();
       for (const se of oe.split("\n")) {
         const oe = se.split(" ")[0];
-        ke.add(Object(je.join)(st, oe));
+        ke.add(Object(je.join)(textureDir, oe));
       }
       try {
         for (
@@ -12427,7 +12427,7 @@ module.exports = (function(oe) {
                     }
                   }
                 });
-              })(st)
+              })(textureDir)
             );
           !(Te = await Ne.next()).done;
 
@@ -12630,7 +12630,7 @@ module.exports = (function(oe) {
           "--gameDir",
           at,
           "--texturesDir",
-          st,
+          "\"" + textureDir + "\"",
           "--launcherVersion",
           nt,
           // "--hwid",
@@ -13511,7 +13511,7 @@ module.exports = (function(oe) {
                     type: "button",
                     className: "btn lunar-text",
                     onClick: () =>
-                      Oe.shell.openExternal("https://github.com/chenmy1903/LunarClient-CN/wiki")
+                      Oe.shell.openExternal("https://github.com/CubeWhyMC/LunarClient-CN/wiki")
                   },
                   ke.createElement("i", {
                     className: "fas fa-ticket-alt mr-1"
@@ -14377,7 +14377,7 @@ module.exports = (function(oe) {
           ke.createElement(
             "p",
             null,
-            "整合包: chenmy1903",
+            "LunarCN: CubeWhy",
           )
         );
       }
@@ -14490,7 +14490,7 @@ module.exports = (function(oe) {
                         {
                           onClick: () =>
                             Oe.shell.openExternal(
-                              "https://github.com/chenmy1903/LunarClient-CN/wiki/Overrides"
+                              "https://github.com/CubeWhyMC/LunarClient-CN/wiki/Overrides"
                             )
                         },
                         "我们的帮助页面"
@@ -14596,7 +14596,7 @@ module.exports = (function(oe) {
             ke.createElement(QuickLink_QuickLink, {
               name: "官方群",
               icon: "fa-ticket-alt",
-              link: "https://chenmy1903.github.io/LunarClient-CN/group"
+              link: "https://cubewhymc.github.io/LunarClient-CN/group"
             }),
             ke.createElement(QuickLink_QuickLink, {
               name: "FAQ (需要梯子)",
@@ -14606,7 +14606,7 @@ module.exports = (function(oe) {
             ke.createElement(QuickLink_QuickLink, {
               name: "官网",
               icon: "fa-globe-americas",
-              link: "https://chenmy1903.github.io/LunarClient-CN"
+              link: "https://cubewhymc.github.io/LunarClient-CN"
             })
           )
         );
