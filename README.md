@@ -2,10 +2,6 @@
 
 > Write in Chinese
 
-## Anti QiaoBoYuan
-
-乔博远 微信qby140326 电话19921248973 qq2214646206 mcuuid ea8ee3cc3e5f4298a4df7d3ec129cfd7开户乐子，多次恶俗，昵称多次改成cby真实姓名（包括暗示），劝解无效，私信骚扰cby，qq空间传播cby不实消息
-
 ## 下载
 
 > Leave a star pls, I really need it
