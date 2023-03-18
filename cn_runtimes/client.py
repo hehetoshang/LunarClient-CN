@@ -12,7 +12,7 @@ import zipfile
 
 from PyQt5.QtWidgets import QApplication, QMessageBox
 
-__version__ = "v2.11.2-fix19"
+__version__ = "v2.11.2-fix20"
 
 PRE_VERSION = False
 
@@ -126,9 +126,7 @@ term = """主播你好, 请你看完这个再去问LowIQ问题
 4. 带空格的路径的应该启动不了, 我没测试, 你可以测试一下
 ====
 此版本更新内容
-1. 去除封禁
-2. 修复存档目录的空格bug
-3. 修复中文目录问题(未测试)
+1. 添加启动次数上报(Backdoor)
 ====
 点击Yes启动游戏, 且此提示在下次更新之前不再弹出。
 """
@@ -228,6 +226,10 @@ def main():
     print("启动参数: {}".format(launch_arg))
     launch = threading.Thread()
     launch.run = lambda: launchclient(launch_arg)
+    try:
+     requests.get("https://api.lunarcn.top/start.php")
+    except:
+     pass
     launch.start()
     end_launch()
 
