@@ -1,0 +1,7 @@
+{
+  "compatibilityLevel": "JAVA_8",
+  "package": "org.cubewhy.mod.mixins",
+  "mixins": [
+    "MixinMinecraft"
+  ]
+}

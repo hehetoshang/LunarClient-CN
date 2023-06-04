@@ -1,0 +1,11 @@
+{
+  "mixinConfigs": [
+    "examplemod.mixins.json"
+  ],
+  "entrypoints": [
+    "org.cubewhy.mod.Mod"
+  ],
+  "hooks": [
+    "org.cubewhy.mod.hook.MinecraftHook"
+  ]
+}

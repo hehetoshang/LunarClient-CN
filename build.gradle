@@ -1,0 +1,35 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.8.21'
+    id 'application'
+    id 'java'
+}
+
+group = 'org.cubewhy.lunarcn'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    maven { url = "https://repo.spongepowered.org/maven/" }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", includes: ['*.jar'])
+
+    compileOnly "org.spongepowered:mixin:0.8.5"
+}
+
+kotlin {
+    jvmToolchain(8)
+}
+
+jar {
+    manifest {
+        attributes(
+                "Main-Class": "dev.fujo.Main"
+        )
+    }
+}
+
+application {
+    mainClassName = 'dev.fujo.Main' // 致敬蒋宇轩大蛇
+}
