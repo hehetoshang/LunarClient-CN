@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id "com.github.johnrengelman.shadow" version "6.1.0"
+    id "com.gorylenko.gradle-git-properties" version "2.4.1"
 }
 
 group = 'org.cubewhy.lunarcn'
@@ -35,6 +36,8 @@ dependencies {
     include 'org.apache.logging.log4j:log4j-slf4j-impl:2.20.0'
 
     include 'com.google.code.gson:gson:2.10.1'
+
+    implementation 'org.jetbrains:annotations:24.0.1'
 }
 
 test {
